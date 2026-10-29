@@ -1,6 +1,6 @@
 'use strict';
 // Builds the paste-into-DevTools snippet. It runs the same extractor as the Playwright capture,
-// inside same-origin iframes at 1440px and 390px, and downloads snapshot.json.
+// inside one same-origin popup window at 1440px and 390px, and downloads snapshot.json.
 const fs = require('fs');
 const path = require('path');
 const { rbExtract, rbDetectChallenge } = require('./extractor');
@@ -19,49 +19,60 @@ const rbDetectChallenge = ${rbDetectChallenge.toString()};
 const VERSION = ${JSON.stringify(version)};
 const log = [];
 const note = (m) => { log.push(new Date().toISOString() + ' ' + m); console.log('[reverse-brand] ' + m); };
-const box = document.createElement('div');
-box.style.cssText = 'position:fixed;left:0;top:0;width:100vw;height:100vh;overflow:hidden;z-index:2147483647;pointer-events:none;opacity:0.02';
-document.documentElement.appendChild(box);
-async function inFrame(url, w, h) {
-  const f = document.createElement('iframe');
-  f.style.cssText = 'position:absolute;left:0;top:0;border:0;width:' + w + 'px;height:' + h + 'px';
-  const loaded = new Promise((res) => { f.onload = res; setTimeout(res, 30000); });
-  f.src = url;
-  box.appendChild(f);
-  await loaded;
-  await new Promise((r) => setTimeout(r, 2500));
-  let win;
-  try { win = f.contentWindow; void win.document.body.innerHTML; } catch (e) { f.remove(); throw new Error('frame not readable (blocked or cross-origin)'); }
-  const ch = rbDetectChallenge(win);
-  if (ch.challenge) { f.remove(); throw new Error('bot check in frame: ' + ch.reason); }
-  const rec = await rbExtract(win, { scrollDelay: 300 });
-  f.remove();
-  return rec;
+// Pages are opened in one same-origin popup window (sites that forbid iframes still allow this).
+// The popup is opened once, synchronously, so the console's user gesture covers it.
+const pop = window.open('about:blank', 'reverse-brand', 'popup,width=1440,height=900,left=0,top=0');
+if (!pop) {
+  note('popup blocked: allow pop-ups for this site (icon in the address bar), then run the snippet again');
+  alert('reverse-brand: allow pop-ups for this site, then run the snippet again.');
+  return;
+}
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+async function inPopup(url, w, h) {
+  try { pop.resizeTo(w + (pop.outerWidth - pop.innerWidth), h + (pop.outerHeight - pop.innerHeight)); } catch (e) {}
+  pop.location.href = url;
+  await wait(800);
+  const deadline = Date.now() + 45000;
+  for (;;) {
+    let ready = false;
+    try { ready = pop.document.readyState === 'complete' && pop.location.href !== 'about:blank'; } catch (e) { throw new Error('popup left the site (redirect to another origin)'); }
+    if (ready) break;
+    if (Date.now() > deadline) throw new Error('page did not finish loading in 45 s');
+    await wait(300);
+  }
+  await wait(2500);
+  const ch = rbDetectChallenge(pop);
+  if (ch.challenge) throw new Error('bot check: ' + ch.reason + '. Complete it in the popup and run the snippet again.');
+  if (Math.abs(pop.innerWidth - w) > 40) note('viewport is ' + pop.innerWidth + 'x' + pop.innerHeight + ' instead of ' + w + 'x' + h + ' (screen too small or window not resizable)');
+  return rbExtract(pop, { scrollDelay: 300 });
 }
 const t0 = performance.now();
 const snap = { tool: 'reverse-brand', version: VERSION, source: 'devtools', capturedAt: new Date().toISOString(), origin: location.origin, host: location.host, userAgent: navigator.userAgent, pages: [], mobile: null, picks: null, log };
 const homeUrl = location.origin + location.pathname;
 try {
   note('home 1440x900');
-  snap.pages.push(await inFrame(homeUrl, 1440, 900));
+  snap.pages.push(await inPopup(homeUrl, 1440, 900));
 } catch (e) {
-  note('iframe capture failed (' + e.message + '); falling back to this window at ' + innerWidth + 'px');
+  note('popup capture failed (' + e.message + '); falling back to this window at ' + innerWidth + 'px');
   snap.pages.push(await rbExtract(window, { scrollDelay: 300 }));
   snap.fallback = 'top-window';
 }
-try {
-  note('home 390x844');
-  snap.mobile = await inFrame(homeUrl, 390, 844);
-} catch (e) { note('mobile pass failed: ' + e.message); }
 if (!snap.fallback) {
   const sel = pickPages(homeUrl, snap.pages[0].links, { min: 3, max: 5 });
   snap.picks = sel;
   for (const p of sel.picked) {
-    try { note('page ' + p.href); snap.pages.push(await inFrame(p.href, 1440, 900)); }
+    try { note('page ' + p.href); snap.pages.push(await inPopup(p.href, 1440, 900)); }
     catch (e) { note('skip ' + p.href + ': ' + e.message); }
   }
+  try {
+    note('home 390x844');
+    const m = await inPopup(homeUrl, 390, 844);
+    if (m.viewport.w <= 430) snap.mobile = m;
+    else note('mobile pass discarded: the popup could not be narrowed to 390px; mobile sizes will be inferred');
+  } catch (e) { note('mobile pass failed: ' + e.message); }
 }
-box.remove();
+try { pop.close(); } catch (e) {}
+
 snap.durationMs = Math.round(performance.now() - t0);
 note('done in ' + Math.round(snap.durationMs / 1000) + 's, ' + snap.pages.length + ' pages');
 const blob = new Blob([JSON.stringify(snap)], { type: 'application/json' });

@@ -1,6 +1,6 @@
 {
   "name": "reverse-brand",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Turn a public brand website into an unofficial, art-directed brand guide with measured design tokens.",
   "bin": { "reverse-brand": "bin/reverse-brand.js" },
   "type": "commonjs",

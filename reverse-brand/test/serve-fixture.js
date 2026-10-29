@@ -10,6 +10,6 @@ http.createServer((req, res) => {
   if (p.endsWith('/')) p += 'index.html';
   const f = path.join(root, p);
   if (!f.startsWith(root) || !fs.existsSync(f)) { res.writeHead(404); return res.end('not found'); }
-  res.writeHead(200, { 'content-type': f.endsWith('.css') ? 'text/css' : 'text/html; charset=utf-8' });
+  res.writeHead(200, { 'x-frame-options': 'DENY', 'content-type': f.endsWith('.css') ? 'text/css' : 'text/html; charset=utf-8' });
   fs.createReadStream(f).pipe(res);
 }).listen(port, () => console.log('fixture on http://localhost:' + port));

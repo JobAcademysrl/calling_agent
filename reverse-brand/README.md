@@ -32,7 +32,7 @@ Chromium, always with `--disable-gpu`) and ffmpeg (WebP and H.264).
 ### DevTools snippet
 
 `--snippet` writes `snippet-devtools.js`. Paste it into the Console on the brand's home page: it
-runs the same extractor in same-origin iframes at 1440px and 390px, picks 3-5 key pages the same
+runs the same extractor in one same-origin popup window (resized to 1440px, then 390px), picks 3-5 key pages the same
 way the CLI does, and downloads `snapshot.json`. Feed that file back with `--snapshot`.
 
 ### Images
