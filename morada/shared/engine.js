@@ -6,6 +6,7 @@ import {
   estimateValue, priceIndicator, inBbox, inPolygon, buildLeaseContract, usdToVes, vesToUsd, listingTitle, zoneById, referralSplit,
 } from './core.js';
 import { DEMO_USERS, DEMO_PASSWORD, seedListings, seedLeads } from './seed.js';
+import { plausible, RATE_SOURCES } from './rates.js';
 
 export class HttpError extends Error {
   constructor(status, message) { super(message); this.status = status; }
@@ -34,7 +35,7 @@ const publicUser = u => u && ({ id: u.id, role: u.role, name: u.name, company: u
 const ownerCard = u => u && ({ id: u.id, name: u.company || u.name, role: u.role, phone: u.phone || '', civ: u.civ || '', preani: !!u.preani, badge: !!PLANS[u.plan]?.badge });
 
 export function emptyDb() {
-  return { version: 1, users: [], sessions: {}, listings: [], leads: [], favorites: {}, searches: [], contracts: [], payments: [], referrals: [], diligence: [], services: [], orders: [], settings: { rate: 236.5, rateUpdatedAt: '2026-10-28T12:00:00Z' } };
+  return { version: 1, users: [], sessions: {}, listings: [], leads: [], favorites: {}, searches: [], contracts: [], payments: [], referrals: [], diligence: [], services: [], orders: [], settings: { rate: 236.5, rateUpdatedAt: '2026-10-28T12:00:00Z', rateAuto: true, rateSource: 'manual', rateError: null } };
 }
 
 export async function seedDb(db) {
@@ -66,8 +67,21 @@ const route = (method, pattern, handler, opts = {}) => {
   routes.push({ method, re, keys, handler, ...opts });
 };
 
-export function createEngine({ db, save = () => {}, storeFile = async dataUrl => dataUrl }) {
-  const ctx = { db, save, storeFile };
+export function createEngine({ db, save = () => {}, storeFile = async dataUrl => dataUrl, fetchRate = null }) {
+  db.settings = { rateAuto: true, rateSource: 'manual', rateError: null, ...db.settings };
+  const ctx = { db, save, storeFile, fetchRate };
+  // Actualiza la tasa desde la fuente oficial; la usa el servidor de forma periódica y el botón del administrador.
+  async function refreshRate() {
+    if (!fetchRate) throw new HttpError(501, 'La lectura automática de la tasa solo está disponible con el servidor.');
+    try {
+      const r = await fetchRate();
+      if (!plausible(r.rate, db.settings.rate)) throw new Error(`valor fuera de rango (${r.rate})`);
+      Object.assign(db.settings, { rate: r.rate, rateUpdatedAt: now(), rateSource: r.source, rateError: null });
+    } catch (e) { db.settings.rateError = e.message; db.settings.rateErrorAt = now(); }
+    await save();
+    return db.settings;
+  }
+  ctx.refreshRate = refreshRate;
 
   async function handle(method, path, { query = {}, body = {}, token = null } = {}) {
     try {
@@ -90,7 +104,7 @@ export function createEngine({ db, save = () => {}, storeFile = async dataUrl =>
       return { status: 500, body: { error: 'Error interno.' } };
     }
   }
-  return { handle, db };
+  return { handle, db, refreshRate };
 }
 
 /* ------------------------------ Helpers de dominio ------------------------------ */
@@ -234,7 +248,7 @@ route('GET', '/api/meta', ({ db }) => ({
   plans: Object.values(PLANS).map(p => ({ ...p, listings: p.listings === Infinity ? null : p.listings })),
   boosts: BOOSTS, diligence: DILIGENCE, roles: ROLES, leadStages: LEAD_STAGES, services: SERVICE_CATEGORIES, operations: OPERATIONS, law: LAW,
   privateFree: PRIVATE_FREE_LISTINGS, privateExtraPrice: PRIVATE_EXTRA_PRICE,
-  rate: db.settings.rate, rateUpdatedAt: db.settings.rateUpdatedAt,
+  rate: db.settings.rate, rateUpdatedAt: db.settings.rateUpdatedAt, rateSource: db.settings.rateSource, rateSourceLabel: RATE_SOURCES[db.settings.rateSource]?.label || 'Carga manual', rateAuto: db.settings.rateAuto, rateError: db.settings.rateError, rateErrorAt: db.settings.rateErrorAt,
   stats: { listings: db.listings.filter(l => l.status === 'active').length, verified: db.listings.filter(l => l.status === 'active' && l.verification === 'verified').length, pros: db.users.filter(u => ['agencia', 'constructora', 'internacional'].includes(u.role)).length, cities: CITIES.length },
 }), { write: false });
 
@@ -655,9 +669,13 @@ route('POST', '/api/admin/listings/:id/verify', ({ db, params, body }) => {
 route('POST', '/api/admin/rate', ({ db, body }) => {
   const rate = num(body.rate);
   if (!rate || rate <= 0) fail(400, 'Tasa no válida.');
-  db.settings.rate = rate; db.settings.rateUpdatedAt = now();
+  Object.assign(db.settings, { rate, rateUpdatedAt: now(), rateSource: 'manual', rateError: null });
+  if (body.auto != null) db.settings.rateAuto = !!body.auto;
   return db.settings;
 }, { auth: true, roles: ['admin'] });
+
+route('POST', '/api/admin/rate/auto', ({ db, body }) => { db.settings.rateAuto = !!body.auto; return db.settings; }, { auth: true, roles: ['admin'] });
+route('POST', '/api/admin/rate/refresh', async ({ refreshRate, db }) => { const s = await refreshRate(); if (s.rateError) fail(502, 'No se pudo leer la tasa. ' + s.rateError); return db.settings; }, { auth: true, roles: ['admin'] });
 
 route('GET', '/api/admin/stats', ({ db }) => {
   const revenue = {};

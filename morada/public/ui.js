@@ -252,6 +252,13 @@ export function readImage(file, max = 1280, quality = 0.78) {
 }
 export const readFileAsDataUrl = file => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(file); });
 
+// Retira un mapa de Leaflet sin cortar una animación de zoom en curso (evita errores al cambiar de página).
+export function disposeMap(map) {
+  if (!map) return;
+  const kill = () => { try { map.off(); map.remove(); } catch { /* ya retirado */ } };
+  if (map._animatingZoom || map._panAnim?._inProgress) { map.stop(); setTimeout(kill, 400); } else kill();
+}
+
 export const featureList = l => (l.features || []).map(f => FEATURES[f]).filter(Boolean);
 export const typeName = t => TYPES[t] || t;
 export const fmtDate = s => (s ? new Date(s).toLocaleDateString('es-VE', { day: 'numeric', month: 'short', year: 'numeric' }) : '—');

@@ -1,6 +1,6 @@
 // Ficha del inmueble: galería, precio bivaluta, indicador frente a la zona, contacto y servicios.
 import { get, post } from '../api.js';
-import { $, $$, esc, icon, card, price, toast, modal, photoOf, photoCount, featureList, typeName, fmtDate, formData, priceText } from '../ui.js';
+import { disposeMap, $, $$, esc, icon, card, price, toast, modal, photoOf, photoCount, featureList, typeName, fmtDate, formData, priceText } from '../ui.js';
 import { zoneById, fmtUsd, fmtVes, usdToVes, rentalTerms, loanPayment, LAW, STATES, PAYMENTS, DOC_KINDS, DILIGENCE, BOOSTS, referralSplit } from '../shared/core.js';
 
 export default async function listing(el, ctx) {
@@ -221,7 +221,7 @@ export default async function listing(el, ctx) {
     });
   });
 
-  return () => mm.remove();
+  return () => disposeMap(mm);
 }
 
 export function boostModal(l, ctx, after) {

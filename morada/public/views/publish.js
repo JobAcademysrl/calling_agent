@@ -1,6 +1,6 @@
 // Asistente de publicación por pasos, con mapa para ubicar el inmueble, sugerencia de precio y carga de documentos.
 import { get, post, patch, mode } from '../api.js';
-import { $, $$, esc, icon, toast, modal, readImage, readFileAsDataUrl, store, fmtUsd, formData, price } from '../ui.js';
+import { disposeMap, $, $$, esc, icon, toast, modal, readImage, readFileAsDataUrl, store, fmtUsd, formData, price } from '../ui.js';
 import { ZONES, zoneById, listingTitle } from '../shared/core.js';
 
 const STEPS = ['Operación', 'Ubicación', 'Características', 'Precio', 'Fotos', 'Documentos', 'Revisar'];
@@ -71,6 +71,7 @@ export default async function publish(el, ctx) {
       ${d.op === 'alquiler' ? `<p class="muted" style="font-size:.9rem">${icon('doc')} Según la ley de 2026 podrás pedir como máximo 3 meses de depósito (<b class="mono" id="dep">—</b>).</p>` : ''}
       ${canNetwork && d.op === 'venta' ? `<label class="check"><input type="checkbox" name="coBroke" ${d.coBroke ? 'checked' : ''}> Abrir a la red de co-corretaje internacional</label><label>Comisión total del inmueble (%)<input class="input" type="number" step="0.5" min="1" max="10" name="coBrokePct" value="${((d.coBrokeCommission || 0.05) * 100).toFixed(1)}"></label>` : ''}`,
     () => `<div class="dropzone" id="drop" tabindex="0" role="button">${icon('camera')}<b>Arrastra fotos o toca para elegirlas</b><span style="font-size:.85rem">JPG o PNG, hasta 12 fotos. Las reducimos automáticamente para que carguen rápido.</span><input type="file" id="files" accept="image/*" multiple hidden></div>
+      <span class="faint" id="photo-count" style="font-size:.85rem"></span>
       <div class="thumbs" id="thumbs"></div>
       <p class="faint" style="font-size:.85rem">Si no subes fotos mostraremos una ilustración del inmueble. Los avisos con fotos reciben más contactos.</p>`,
     () => `<p class="muted">Sube el expediente para obtener el sello <b>Título verificado SAREN</b>. Es confidencial: solo lo ven nuestro equipo legal, quien contrata una due diligence y las agencias de la red.</p>
@@ -90,7 +91,7 @@ export default async function publish(el, ctx) {
     $$('#steps button', el).forEach((b, i) => { b.classList.toggle('on', i === step); b.classList.toggle('done', i < step); });
     $('#back', el).style.visibility = step ? 'visible' : 'hidden';
     $('#next', el).innerHTML = step === STEPS.length - 1 ? `${icon('check')} ${editId ? 'Guardar cambios' : 'Publicar aviso'}` : 'Continuar →';
-    pickMap?.remove(); pickMap = null;
+    disposeMap(pickMap); pickMap = null;
     if (step === 1) mountMap();
     if (step === 3) mountPrice();
     if (step === 4) mountPhotos();
@@ -135,12 +136,35 @@ export default async function publish(el, ctx) {
 
   function mountPhotos() {
     const thumbs = $('#thumbs', form), input = $('#files', form), drop = $('#drop', form);
-    const paintThumbs = () => { thumbs.innerHTML = d.photos.map((p, i) => `<figure><img src="${p}" alt="Foto ${i + 1}"><button type="button" class="icon-btn" data-rm="${i}" aria-label="Quitar foto">${icon('x')}</button>${i === 0 ? '<span class="chip" style="position:absolute;left:6px;bottom:6px">Portada</span>' : ''}</figure>`).join(''); $$('[data-rm]', thumbs).forEach(b => b.addEventListener('click', () => { d.photos.splice(Number(b.dataset.rm), 1); paintThumbs(); })); };
+    // Miniaturas: arrastrar para ordenar, flechas para mover y estrella para elegir la portada.
+    const move = (from, to) => { if (to < 0 || to >= d.photos.length || from === to) return; const [p] = d.photos.splice(from, 1); d.photos.splice(to, 0, p); paintThumbs(); saveDraft(); };
+    const paintThumbs = () => {
+      thumbs.innerHTML = d.photos.map((p, i) => `<figure draggable="true" data-i="${i}" class="${i === 0 ? 'cover' : ''}"><img src="${p}" alt="Foto ${i + 1}" draggable="false">
+        <button type="button" class="icon-btn" data-rm="${i}" aria-label="Quitar foto ${i + 1}">${icon('x')}</button>
+        <div class="thumb-cover">${i === 0 ? '<span class="chip chip-gold">Portada</span>' : `<button type="button" class="chip" data-cover="${i}">${icon('star')} Portada</button>`}</div>
+        <div class="thumb-bar"><span class="row" style="gap:4px"><button type="button" class="chip" data-mv="${i}" data-to="${i - 1}" aria-label="Mover a la izquierda" ${i === 0 ? 'disabled' : ''}>‹</button><button type="button" class="chip" data-mv="${i}" data-to="${i + 1}" aria-label="Mover a la derecha" ${i === d.photos.length - 1 ? 'disabled' : ''}>›</button></span></div></figure>`).join('');
+      $('#photo-count', form).textContent = d.photos.length ? `${d.photos.length} de 12 fotos · arrastra para ordenar` : '';
+      $$('[data-rm]', thumbs).forEach(b => b.addEventListener('click', () => { d.photos.splice(Number(b.dataset.rm), 1); paintThumbs(); saveDraft(); }));
+      $$('[data-cover]', thumbs).forEach(b => b.addEventListener('click', () => move(Number(b.dataset.cover), 0)));
+      $$('[data-mv]', thumbs).forEach(b => b.addEventListener('click', () => move(Number(b.dataset.mv), Number(b.dataset.to))));
+      $$('figure', thumbs).forEach(f => {
+        f.addEventListener('dragstart', e => { e.dataTransfer.setData('text/x-photo', f.dataset.i); f.classList.add('dragging'); });
+        f.addEventListener('dragend', () => f.classList.remove('dragging'));
+        f.addEventListener('dragover', e => { if (e.dataTransfer.types.includes('text/x-photo')) { e.preventDefault(); f.classList.add('over'); } });
+        f.addEventListener('dragleave', () => f.classList.remove('over'));
+        f.addEventListener('drop', e => { e.preventDefault(); e.stopPropagation(); f.classList.remove('over'); const from = e.dataTransfer.getData('text/x-photo'); if (from !== '') move(Number(from), Number(f.dataset.i)); });
+      });
+    };
     const add = async files => {
-      for (const f of [...files].slice(0, 12 - d.photos.length)) {
+      const list = [...files].filter(f => f.type.startsWith('image/'));
+      if (list.length > 12 - d.photos.length) toast(`Solo caben 12 fotos: agregamos las primeras ${Math.max(0, 12 - d.photos.length)}.`, 'err');
+      drop.classList.add('busy');
+      for (const f of list.slice(0, 12 - d.photos.length)) {
         if (!f.type.startsWith('image/')) continue;
         try { d.photos.push(await readImage(f, mode.server ? 1600 : 900, mode.server ? 0.82 : 0.7)); } catch { toast('No pudimos leer ' + f.name, 'err'); }
       }
+      drop.classList.remove('busy');
+      input.value = '';
       paintThumbs(); saveDraft();
     };
     drop.addEventListener('click', () => input.click());
@@ -199,5 +223,5 @@ export default async function publish(el, ctx) {
   $$('#steps button', el).forEach(b => b.addEventListener('click', () => { const t = Number(b.dataset.s); if (t > step) { const err = validate(); if (err) { toast(err, 'err'); return; } } else collect(); step = t; paint(); }));
   form.addEventListener('submit', e => e.preventDefault());
   paint();
-  return () => pickMap?.remove();
+  return () => disposeMap(pickMap);
 }

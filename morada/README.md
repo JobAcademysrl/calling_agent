@@ -58,7 +58,11 @@ Al primo avvio viene creato `data/db.json` con dati di esempio (fittizi). Accoun
 
 ## Simulato in questa versione
 
-Pagamenti (piani, visibilità, due diligence), escrow, OCR dei documenti, invio email/notifiche, WhatsApp Business API e tasso BCV (impostato a mano dall'amministratore). Le illustrazioni degli annunci senza foto sono generate dal codice.
+Pagamenti (piani, visibilità, due diligence), escrow, OCR dei documenti, invio email/notifiche e WhatsApp Business API.
+
+## Tasso BCV automatico
+
+Il server legge il tasso ufficiale all'avvio e ogni 6 ore: prima dalla pagina del BCV, poi da DolarApi come riserva. Un valore che differisce più del 40 % dal precedente viene scartato. Se la lettura fallisce resta l'ultimo tasso valido e il pannello admin mostra l'errore; l'admin può forzare la lettura o inserire il tasso a mano. Variabili: `RATE_EVERY_HOURS` (default 6), `RATE_AUTO=0` per disattivare. Le illustrazioni degli annunci senza foto sono generate dal codice.
 
 ## Verso la produzione (come indica lo studio)
 

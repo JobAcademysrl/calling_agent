@@ -60,3 +60,17 @@ test('AVM y geometría', () => {
   assert.ok(inPolygon(0.5, 0.5, [[0, 0], [1, 0], [1, 1], [0, 1]]));
   assert.ok(!inPolygon(2, 2, [[0, 0], [1, 0], [1, 1], [0, 1]]));
 });
+
+test('lectura de la tasa BCV', async () => {
+  const { parseBcvHtml, parseDolarApi, plausible, fetchOfficialRate } = await import('../shared/rates.js');
+  const html = '<div id="dolar" class="col-sm-12"><div class="field-content"><div class="row recuadrotsmc"><div class="col-sm-6 col-xs-6"><span> USD</span></div><div class="col-sm-6 col-xs-6 centrado"><strong> 236,45780000 </strong></div></div></div></div>';
+  assert.equal(parseBcvHtml(html), 236.46);
+  assert.equal(parseBcvHtml('<html></html>'), null);
+  assert.equal(parseDolarApi({ promedio: 240.12 }), 240.12);
+  assert.ok(plausible(250, 236) && !plausible(500, 236));
+  const fake = async url => url.includes('bcv') ? { ok: false, status: 503 } : { ok: true, json: async () => ({ promedio: 238.4 }) };
+  assert.deepEqual(await fetchOfficialRate(fake), { rate: 238.4, source: 'dolarapi' });
+  const e = createEngine({ db: await seedDb(emptyDb()), fetchRate: async () => ({ rate: 241.5, source: 'bcv' }) });
+  const s = await e.refreshRate();
+  assert.equal(s.rate, 241.5); assert.equal(s.rateSource, 'bcv');
+});

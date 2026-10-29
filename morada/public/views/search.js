@@ -1,6 +1,6 @@
 // Búsqueda: lista + mapa sincronizados, filtros facetados, dibujo de zona y búsquedas guardadas.
 import { get, post, mode } from '../api.js';
-import { $, $$, esc, icon, card, toast, modal, shortUsd, reveal, tilt, priceText, currency } from '../ui.js';
+import { disposeMap, $, $$, esc, icon, card, toast, modal, shortUsd, reveal, tilt, priceText, currency } from '../ui.js';
 import { ZONES, zoneById, usdToVes } from '../shared/core.js';
 import { VENEZUELA } from '../vendor/venezuela.js';
 
@@ -18,9 +18,10 @@ export default async function search(el, ctx) {
       <div class="filters-bar">
         <div class="filters-row">
           <div class="seg" role="group" aria-label="Operación"><button data-op="venta">Comprar</button><button data-op="alquiler">Alquilar</button></div>
-          <input class="input grow" id="f-q" placeholder="Palabra clave: piscina, Las Mercedes…" value="${esc(q.q || '')}" aria-label="Palabra clave">
+          <button class="btn btn-sm fx-toggle" id="fx-toggle" aria-expanded="false" aria-controls="fx">${icon('search')} Filtros <span id="fx-n"></span></button>
+          <input class="input grow fx-q" id="f-q" placeholder="Palabra clave: piscina, Las Mercedes…" value="${esc(q.q || '')}" aria-label="Palabra clave">
         </div>
-        <div class="filters-row">
+        <div class="filters-row fx" id="fx">
           <select class="input" id="f-place" aria-label="Ciudad o zona"><option value="">Toda Venezuela</option>${meta.cities.map(c => `<optgroup label="${esc(c)}"><option value="city:${esc(c)}">${esc(c)} (todas)</option>${ZONES.filter(z => z.city === c).map(z => `<option value="zone:${z.id}">${esc(z.name)}</option>`).join('')}</optgroup>`).join('')}</select>
           <select class="input" id="f-type" aria-label="Tipo"><option value="">Tipo</option>${Object.entries(meta.types).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select>
           <input class="input" id="f-pmin" type="number" min="0" inputmode="numeric" placeholder="Desde $" style="width:110px" aria-label="Precio mínimo en USD" value="${esc(q.pmin || '')}">
@@ -32,7 +33,7 @@ export default async function search(el, ctx) {
           <span id="count" class="muted" aria-live="polite"></span>
           <div class="row" style="gap:8px">
             <select class="input" id="f-sort" aria-label="Ordenar"><option value="relevancia">Relevancia</option><option value="recientes">Más recientes</option><option value="precio-asc">Precio: menor a mayor</option><option value="precio-desc">Precio: mayor a menor</option><option value="ppm2-asc">Menor precio por m²</option><option value="m2-desc">Más metros</option></select>
-            <button class="btn btn-sm" id="save">${icon('bell')} Guardar búsqueda</button>
+            <button class="btn btn-sm" id="save" aria-label="Guardar búsqueda">${icon('bell')}<span class="hide-sm"> Guardar búsqueda</span></button>
           </div>
         </div>
       </div>
@@ -132,6 +133,8 @@ export default async function search(el, ctx) {
     lastFit = key;
     const n = ['amin', 'amax', 'baths', 'fmin', 'state', 'features', 'payments', 'verified', 'parking', 'project'].filter(k => q[k]).length;
     $('#more-n', el).textContent = n ? `(${n})` : '';
+    const all = n + ['q', 'zone', 'city', 'type', 'pmin', 'pmax', 'rooms'].filter(k => q[k]).length;
+    $('#fx-n', el).textContent = all ? `(${all})` : '';
     reveal(el); tilt(el);
     // Resaltar marcador al pasar sobre la tarjeta
     $$('#grid .card', el).forEach(c => {
@@ -156,6 +159,13 @@ export default async function search(el, ctx) {
   $('#f-rooms', el).addEventListener('change', e => { set('rooms', e.target.value); run(); });
   $('#f-sort', el).addEventListener('change', e => { set('sort', e.target.value === 'relevancia' ? '' : e.target.value); run({ fit: false }); });
   for (const id of ['pmin', 'pmax']) $('#f-' + id, el).addEventListener('change', e => { set(id, e.target.value); run(); });
+
+  /* Móvil: los filtros se pliegan detrás de un botón */
+  $('#fx-toggle', el).addEventListener('click', () => {
+    const open = !el.querySelector('.filters-bar').classList.contains('fx-open');
+    el.querySelector('.filters-bar').classList.toggle('fx-open', open);
+    $('#fx-toggle', el).setAttribute('aria-expanded', open);
+  });
 
   /* Más filtros */
   $('#more', el).addEventListener('click', () => {
@@ -266,6 +276,6 @@ export default async function search(el, ctx) {
   setTimeout(() => map.invalidateSize(), 50);
   await run();
   if (q.bbox) { const [w, s, e, n] = q.bbox.split(',').map(Number); map.fitBounds([[s, w], [n, e]]); }
-  return () => { document.removeEventListener('theme', onTheme); map.remove(); };
+  return () => { document.removeEventListener('theme', onTheme); disposeMap(map); };
 }
 export { priceText };

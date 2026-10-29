@@ -6,6 +6,7 @@ import { join, extname, normalize, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomBytes } from 'node:crypto';
 import { createEngine, emptyDb, seedDb } from './shared/engine.js';
+import { fetchOfficialRate } from './shared/rates.js';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = process.env.MORADA_DATA || join(ROOT, 'data');
@@ -43,7 +44,17 @@ async function storeFile(dataUrl) {
   return '/uploads/' + name;
 }
 
-const engine = createEngine({ db, save, storeFile });
+const engine = createEngine({ db, save, storeFile, fetchRate: () => fetchOfficialRate() });
+
+// Tasa BCV: se consulta al arrancar y cada RATE_EVERY_HOURS horas (6 por defecto) si está en automático.
+const RATE_EVERY = (Number(process.env.RATE_EVERY_HOURS) || 6) * 3600 * 1000;
+async function rateTick() {
+  if (!db.settings.rateAuto || process.env.RATE_AUTO === '0') return;
+  const s = await engine.refreshRate().catch(e => ({ rateError: e.message }));
+  console.log(s.rateError ? `Tasa BCV no actualizada: ${s.rateError}` : `Tasa BCV actualizada: ${s.rate} (${s.rateSource})`);
+}
+rateTick();
+setInterval(rateTick, RATE_EVERY).unref();
 
 function readBody(req) {
   return new Promise((resolve, reject) => {
