@@ -1,0 +1,21 @@
+:root{--brand:#e4002b;--ink:#1a1a1a;--muted:#5c6066;--bg:#ffffff;--surface:#f4f5f7;--dark:#101828;--radius-card:16px;--ease:cubic-bezier(.2,.8,.2,1);--font:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);font-size:16px;line-height:1.5}
+header{position:sticky;top:0;height:64px;display:flex;align-items:center;gap:24px;padding:0 32px;background:#fff;border-bottom:1px solid #e3e5e8;z-index:5}
+header .logo svg{width:132px;height:28px}header nav a{color:var(--ink);text-decoration:none;font-weight:500;font-size:15px;margin-right:20px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.hero{background:linear-gradient(135deg,#e4002b,#8a0019);color:#fff;padding:96px 0}
+.hero h1{font-size:64px;line-height:1.1;font-weight:700;letter-spacing:-0.02em;margin:0 0 16px}
+.hero p{font-size:20px;max-width:640px;margin:0 0 32px}
+.btn{display:inline-block;padding:12px 24px;border-radius:999px;background:var(--brand);color:#fff;font-weight:600;text-decoration:none;transition:background .3s var(--ease)}
+.btn.light{background:#fff;color:var(--brand)}.btn.outline{background:transparent;border:1px solid var(--ink);color:var(--ink)}
+section{padding:80px 0}section.alt{background:var(--surface)}section.dark{background:var(--dark);color:#fff}
+h2{font-size:40px;line-height:1.2;font-weight:700;margin:0 0 24px}h3{font-size:22px;line-height:1.3;font-weight:600;margin:12px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{background:#fff;border-radius:var(--radius-card);box-shadow:0 2px 8px rgba(0,0,0,.08);padding:16px;transition:transform .4s var(--ease)}
+.card img{width:100%;height:180px;object-fit:cover;border-radius:12px;display:block}
+.small{font-size:13px;color:var(--muted)}
+.search{display:flex;gap:8px;margin-top:24px}.search input{height:48px;border:1px solid #c9ccd1;border-radius:8px;padding:0 16px;font-size:16px;width:360px}
+footer{background:#f4f5f7;padding:48px 0;font-size:14px;color:var(--muted)}
+#didomi-host{position:fixed;bottom:0;left:0;right:0;background:#222;color:#fff;padding:20px}
+@media (max-width:768px){.hero h1{font-size:36px}h2{font-size:28px}.grid{grid-template-columns:1fr}.search input{width:100%}}
+@media (min-width:1024px){.wrap{padding:0 32px}}
