@@ -277,7 +277,8 @@ function analyse(snap) {
   const radiiList = top(radiiMap).map(([v, n]) => ({ value: v === 'pill' ? 'pill' : +v, count: n }));
   const pillShare = r3((radiiMap.pill || 0) / (sum(radiiMap) || 1));
   const maxW = mergeMaps(pages.map((p) => p.maxWidths));
-  const containerTop = top(maxW).find(([v]) => +v >= 960 && +v <= 1600);
+  const vwDesk = (home.viewport && home.viewport.w) || 1440;
+  const containerTop = top(maxW).find(([v]) => +v >= 960 && +v <= Math.min(1600, vwDesk - 40));
   const container = containerTop ? +containerTop[0] : 1200;
   if (!containerTop) assume('Layout', 'No max-width container between 960 and 1600px; container = 1200px.');
   const cols = mergeMaps(pages.map((p) => p.gridCols));
@@ -286,8 +287,10 @@ function analyse(snap) {
   const columns = colTop ? +colTop[0] : (cardSibs.length ? Math.round(median(cardSibs)) : 12);
   if (!colTop) assume('Layout', `No CSS grid columns measured; columns = ${columns} from repeated card siblings.`);
   const gutters = mergeMaps(pages.map((p) => p.gridGaps));
-  const gutterTop = top(gutters)[0] || top(gap)[0];
+  // Layout gutters are rarely below 16px; smaller gaps belong to compact UI rows.
+  const gutterTop = top(gutters).find(([v]) => +v >= 16) || top(gap).find(([v]) => +v >= 16) || top(gutters)[0];
   const gutter = gutterTop ? +gutterTop[0] : base * 3;
+  if (gutterTop && top(gutters)[0] && top(gutters)[0][0] !== gutterTop[0]) assume('Layout', `Most common grid gap is ${top(gutters)[0][0]}px (compact UI rows); gutter = the most common gap of 16px or more (${gutter}px).`);
   const bpMap = mergeMaps(pages.map((p) => p.breakpoints));
   const breakpoints = [...new Set(top(bpMap).filter(([, n]) => n >= 1).slice(0, 12).map(([k]) => +k.split(':')[1]))].filter((v) => v >= 320 && v <= 1920).sort((a, b) => a - b);
   const rhythm = sectionRhythm(home);
@@ -308,6 +311,12 @@ function analyse(snap) {
     if (c.title && v.titles.length < 4) v.titles.push(c.title);
   });
   const cardVariants = Object.values(cardMap).map((v) => Object.assign(v, { padding: v.paddings[v.paddings.length >> 1], paddings: undefined, fill: v.bg && v.bg.length === 7 ? 'solid' : v.backdrop ? 'glass' : 'none' })).sort((a, b) => b.count - a.count).slice(0, 6);
+  if (!cardVariants.length) {
+    const shadow = (top(shadowsMap)[0] || [null])[0];
+    const r = (radiiList.find((x) => x.value !== 'pill' && x.value >= 8) || { value: 12 }).value;
+    cardVariants.push({ bg: background, radius: r, shadow, backdrop: null, borderColor: shadow ? null : border, media: null, padding: [base * 2, base * 2, base * 2, base * 2], count: 0, titles: [], ground: surface || background, fill: 'solid', inferred: true });
+    assume('Components', `No repeated card elements detected; card inferred from the most common radius (${r}px), the most common shadow and the background colour.`);
+  }
   const cardRadius = cardVariants.length ? median(cardVariants.slice(0, 3).map((c) => c.radius)) : (radiiList.find((r) => r.value !== 'pill' && r.value >= 8) || { value: 12 }).value;
   const nav = home.header ? Object.assign({}, home.header) : null;
   if (!nav) assume('Components', 'No header element found; nav mock is inferred.');
@@ -347,7 +356,7 @@ function analyse(snap) {
   };
 
   // ---------- Voice ----------
-  const voice = analyseVoice(pages);
+  const voice = analyseVoice(pages, roles);
 
   // ---------- Misc ----------
   const brandName = guessBrand(snap);
@@ -399,11 +408,18 @@ function sectionRhythm(home) {
   return bands.map((b) => ({ top: b.top, h: b.h, share: r3(b.h / total), bg: b.bg, tone: C.chroma(b.bg) > 0.1 ? 'colour' : C.isDark(b.bg) ? 'dark' : 'light', gradient: b.gradient, image: b.image, tag: b.tag }));
 }
 
-function analyseVoice(pages) {
+function analyseVoice(pages, roles) {
   const lines = [];
+  const fix = (t) => t.replace(/([.!?])([A-ZÀ-Ý])/g, '$1 $2').trim();
+  const PRICE = /^[€$£]|[€$£]\s?\d|\d[\d.,]{4,}/;
+  const headMin = Math.max(20, roles.h2.size * 0.95);
   pages.forEach((p) => {
-    p.headings.forEach((h) => lines.push({ kind: h.tag, text: h.text, url: p.url }));
-    p.paragraphs.forEach((x) => lines.push({ kind: 'p', text: x.text, url: p.url }));
+    p.headings.forEach((h) => lines.push({ kind: h.tag, text: fix(h.text), url: p.url }));
+    // Many sites style headlines on divs and spans: take headline-sized text from the text index too.
+    (p.textIndex || []).forEach((t) => {
+      if (t.s >= headMin && t.w >= 500 && !PRICE.test(t.t) && t.t.split(/\s+/).length >= 2) lines.push({ kind: t.s >= roles.h1.size * 0.95 ? 'h1' : 'h2', text: fix(t.t), url: p.url });
+    });
+    p.paragraphs.forEach((x) => lines.push({ kind: 'p', text: fix(x.text), url: p.url }));
   });
   const seen = new Set();
   const uniq = lines.filter((l) => { const k = l.text.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
@@ -450,9 +466,13 @@ function analyseVoice(pages) {
   const byPriority = [...uniq].filter((l) => words(l.text).length >= 3 && words(l.text).length <= 15 && !/©|cookie|privacy/i.test(l.text))
     .sort((a, b) => (/^h[12]$/.test(b.kind) - /^h[12]$/.test(a.kind)) || (a.kind === 'p') - (b.kind === 'p'));
   const usedPages = {};
+  // Skip templated near-duplicates ("Case in vendita su X" vs "Loft in vendita su X").
+  const wordset = (t) => new Set(t.toLowerCase().split(/[^a-zà-ÿ0-9.]+/).filter(Boolean));
+  const similar = (x, y) => { const A = wordset(x), B = wordset(y); const inter = [...A].filter((w) => B.has(w)).length; return inter / Math.max(1, Math.min(A.size, B.size)) >= 0.6; };
   for (const l of byPriority) {
     if (quotes.length >= 5) break;
-    if ((usedPages[l.url] || 0) >= 2 && byPriority.length > 8) continue;
+    if ((usedPages[l.url] || 0) >= 3 && byPriority.length > 8) continue;
+    if (quotes.some((q) => similar(q.text, l.text))) continue;
     usedPages[l.url] = (usedPages[l.url] || 0) + 1;
     quotes.push(l);
   }

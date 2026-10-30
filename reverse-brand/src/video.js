@@ -22,7 +22,7 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#000}
 .shade::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgb(0 0 0 / .62),rgb(0 0 0 / .1) 65%)}
 .inner{position:relative;z-index:2;display:flex;flex-direction:column;height:100%}
 .kicker{font:600 26px/1.2 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--color-action)}
-.dark .kicker,.full .kicker{color:color-mix(in oklab,var(--color-action) 50%,white)}
+.dark .kicker,.full .kicker{color:color-mix(in oklab,var(--color-text-inverse) 80%,transparent)}
 .h{font-family:var(--font-display);font-weight:var(--type-display-weight);letter-spacing:var(--type-display-tracking);line-height:1.02;font-size:112px;margin-top:18px}
 .p{font:400 34px/1.4 var(--font-body);opacity:.85;margin-top:22px;max-width:30ch}
 .row{display:flex;gap:28px;margin-top:56px}

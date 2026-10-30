@@ -20,7 +20,7 @@ html,body{margin:0;width:var(--w);height:var(--h);overflow:hidden}
 .credit{position:absolute;left:24px;bottom:20px;z-index:4;font:600 18px/1 var(--font-body);padding:9px 14px;border-radius:999px;background:rgb(0 0 0 / .55);color:#fff}
 .unofficial{font-size:18px;padding:10px 16px}
 .kicker{font:600 22px/1.2 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--color-action)}
-.dark .kicker{color:color-mix(in oklab,var(--color-action) 55%,white)}
+.dark .kicker{color:color-mix(in oklab,var(--color-text-inverse) 78%,transparent)}
 .h{font-family:var(--font-display);font-weight:var(--type-display-weight);letter-spacing:var(--type-display-tracking);line-height:1.02;margin:16px 0 0}
 .p{font:400 28px/1.4 var(--font-body);margin-top:20px;opacity:.85}
 .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:end;gap:24px;font:400 18px/1.4 var(--font-body);opacity:.8}
@@ -79,7 +79,7 @@ function buildSlides(ctx) {
   ];
   const x = [
     ['cover', `<div class="s dark" style="flex-direction:row">${photo('hero', 'width:52%')}${badge()}<div class="pad" style="flex:1;display:flex;flex-direction:column"><div class="kicker" style="margin-top:60px">Brand guidelines</div><div class="h" style="font-size:88px">${esc(a.brand)}</div><div class="p">Measured from ${a.pages.length} pages of ${esc(a.host)}.</div>${foot}</div></div>`],
-    ['colour', `<div class="s dark pad">${badge()}<div class="kicker">Colour</div><div style="display:grid;grid-template-columns:1fr 1.3fr;gap:40px;margin-top:28px"><div>${pal}<div class="p">${R.action.hex} action · ${R['surface-inverse'].hex} dark ground · ${R.background.hex} background</div></div><div class="tiles">${tiles(6)}</div></div>${foot}</div>`],
+    ['colour', `<div class="s dark pad">${badge()}<div class="kicker">Colour</div><div style="display:grid;grid-template-columns:1fr 1.3fr;gap:40px;margin-top:28px"><div>${pal}<div class="p">${R.action.hex} action · ${R['surface-inverse'].hex} inverse ground · ${R.background.hex} background</div></div><div class="tiles">${tiles(6)}</div></div>${foot}</div>`],
     ['typography', `<div class="s light pad">${badge(true)}<div class="kicker">Typography</div><div style="display:grid;grid-template-columns:1fr 1.4fr;gap:56px;margin-top:20px"><div class="h" style="font-size:180px;line-height:.9">Aa</div><div class="roles">${roleRows}</div></div>${foot}</div>`],
     ['components', `<div class="s dark pad">${badge()}<div class="kicker">Components and tokens</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:28px"><div class="btns">${btns}</div><pre style="font-size:17px">${esc(tokenExcerpt)}</pre></div>${foot}</div>`],
   ];

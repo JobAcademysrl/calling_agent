@@ -12,7 +12,7 @@ const FALLBACK = {
   street: 'linear-gradient(115deg, color-mix(in oklab, var(--color-accent) 35%, var(--color-surface)) 0%, color-mix(in oklab, var(--color-action) 25%, var(--color-surface)) 55%, color-mix(in oklab, var(--color-surface-inverse) 40%, var(--color-surface)) 100%)',
   sky: 'linear-gradient(180deg, color-mix(in oklab, var(--color-surface) 70%, var(--color-accent)) 0%, var(--color-surface) 70%, var(--color-background) 100%)',
   glass: 'repeating-linear-gradient(90deg, color-mix(in oklab, var(--color-surface-inverse) 85%, white) 0 2px, transparent 2px 64px), linear-gradient(135deg, var(--color-surface-inverse), color-mix(in oklab, var(--color-action) 45%, var(--color-surface-inverse)))',
-  grid: 'repeating-linear-gradient(0deg, color-mix(in oklab, var(--color-border) 80%, transparent) 0 1px, transparent 1px 48px), repeating-linear-gradient(90deg, color-mix(in oklab, var(--color-border) 80%, transparent) 0 1px, transparent 1px 48px), var(--color-surface)',
+  grid: 'repeating-linear-gradient(0deg, color-mix(in oklab, var(--color-accent) 35%, transparent) 0 1px, transparent 1px 48px), repeating-linear-gradient(90deg, color-mix(in oklab, var(--color-accent) 35%, transparent) 0 1px, transparent 1px 48px), linear-gradient(160deg, var(--color-surface), color-mix(in oklab, var(--color-accent) 22%, var(--color-surface)))',
   tokens: 'conic-gradient(from 210deg at 70% 40%, var(--color-action), var(--color-accent), var(--color-action-alt), var(--color-surface-inverse), var(--color-action))',
   subject: 'linear-gradient(200deg, color-mix(in oklab, var(--color-surface) 60%, white) 0%, color-mix(in oklab, var(--color-action) 18%, var(--color-surface)) 60%, color-mix(in oklab, var(--color-surface-inverse) 30%, var(--color-surface)) 100%)',
 };

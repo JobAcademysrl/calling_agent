@@ -292,7 +292,7 @@ async function rbExtract(win, opts) {
     const distinct = (s.bg && s.bg !== ground && s.bg.length >= 7) || s.shadow || s.borderColor || s.radius > 0 || s.backdrop;
     if (!distinct) return;
     const media = el.querySelector('img,picture,video,[style*="background-image"]');
-    const heading = el.querySelector('h1,h2,h3,h4,h5,h6,strong,[class*=title]');
+    const heading = el.querySelector('h1,h2,h3,h4,h5,h6,strong,[class*=title]') || Array.from(el.querySelectorAll('div,span,p,a')).find((d) => { const ds = win.getComputedStyle(d); return px(ds.fontSize) >= 18 && (+ds.fontWeight || 400) >= 600 && ownText(d).length > 2; });
     if (!media && !heading) return;
     const key = cls + '|' + s.bg + '|' + s.radius;
     if (cardSeen.has(key)) return;
@@ -502,10 +502,15 @@ function rbDetectChallenge(win) {
   const doc = win.document;
   const t = ((doc.title || '') + ' ' + ((doc.body && doc.body.innerText) || '').slice(0, 3000)).toLowerCase();
   const re = /(captcha|verify you are human|verifica di essere|are you a robot|non sono un robot|access denied|accesso negato|just a moment|attention required|checking your browser|please enable js and disable any ad blocker|blocked|unusual traffic)/;
-  const frames = Array.from(doc.querySelectorAll('iframe')).map((f) => f.src || '');
-  const provider = frames.find((s) => /captcha-delivery|datadome|perimeterx|px-captcha|hcaptcha|recaptcha|challenges\.cloudflare|turnstile/.test(s));
   const shortBody = ((doc.body && doc.body.innerText) || '').trim().length < 400;
-  if (provider) return { challenge: true, reason: 'challenge iframe: ' + provider.slice(0, 80) };
+  // A challenge iframe counts only when it is visible and large, or the page is near-empty:
+  // invisible reCAPTCHA v3 / Turnstile widgets sit on normal pages too.
+  const provider = Array.from(doc.querySelectorAll('iframe')).find((f) => {
+    if (!/captcha-delivery|datadome|perimeterx|px-captcha|hcaptcha|recaptcha|challenges\.cloudflare|turnstile/.test(f.src || '')) return false;
+    const r = f.getBoundingClientRect();
+    return shortBody || (r.width >= 280 && r.height >= 200 && win.getComputedStyle(f).visibility !== 'hidden');
+  });
+  if (provider) return { challenge: true, reason: 'challenge iframe: ' + provider.src.slice(0, 80) };
   if (re.test(t) && shortBody) return { challenge: true, reason: 'challenge text in a near-empty page' };
   return { challenge: false };
 }

@@ -18,7 +18,7 @@ function guideCss() {
 .on-dark .muted{color:color-mix(in oklab,var(--ink-dark) 68%,transparent)}
 .muted{color:var(--color-text-muted)}
 .eyebrow{font:600 var(--type-small-size)/1.2 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--color-action);margin-bottom:var(--space-2,16px)}
-.on-dark .eyebrow{color:color-mix(in oklab,var(--color-action) 55%,white)}
+.on-dark .eyebrow{color:color-mix(in oklab,var(--color-text-inverse) 78%,transparent)}
 .sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px;margin-bottom:clamp(32px,5vw,64px)}
 .sec-head p{max-width:46ch}
 .topbar{position:fixed;inset:0 0 auto 0;z-index:50;height:var(--nav-height);display:flex;align-items:center;transition:background-color .5s var(--motion-ease),box-shadow .5s var(--motion-ease),color .5s var(--motion-ease);color:var(--color-text-inverse)}
@@ -62,6 +62,7 @@ function guideCss() {
 .ground{padding:clamp(24px,4vw,48px);border-radius:var(--card-radius);display:grid;gap:20px;align-content:start}
 .ground.light{background:var(--ground-light);color:var(--ink-light);box-shadow:inset 0 0 0 1px var(--color-border)}
 .ground.dark{background:var(--ground-dark);color:var(--ink-dark)}
+.ground>.rb-btn{justify-self:start}
 .ground .cards2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .ground.dark .rb-card{background:color-mix(in oklab,var(--color-surface-inverse) 82%,white);color:var(--color-text-inverse)}
 .check{font:500 13px/1.5 ui-monospace,Menlo,monospace;padding:12px 14px;border-radius:12px;background:color-mix(in oklab,currentColor 8%,transparent)}
@@ -122,6 +123,8 @@ summary{cursor:pointer;font-weight:600}
 .variants{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .variant{border-radius:var(--card-radius);padding:28px 20px 18px;display:grid;gap:18px;justify-items:start;box-shadow:inset 0 0 0 1px rgb(255 255 255 / .12)}
 .variant .mono{opacity:.8;line-height:1.5}
+.variant.light{color:var(--ink-light)}.variant.dark{color:var(--ink-dark)}
+.on-dark .variant.light .rb-btn--outline{color:var(--button-outline-fg);border-color:var(--button-outline-border)}
 .navmock{display:flex;align-items:center;gap:20px;height:var(--nav-height);padding:0 20px;background:var(--nav-bg);color:var(--nav-link-color);border-radius:var(--card-radius);overflow:hidden}
 .logo-ph{flex:none;width:var(--nav-logo-width);height:var(--nav-logo-height);border:1.5px dashed var(--nav-logo-color);border-radius:4px;display:grid;place-items:center;font:500 10px/1 ui-monospace,monospace;color:var(--nav-logo-color);white-space:nowrap;overflow:hidden}
 .navmock a{font-size:var(--nav-link-size);font-weight:var(--nav-link-weight);text-decoration:none;white-space:nowrap}
@@ -146,6 +149,8 @@ summary{cursor:pointer;font-weight:600}
 pre{margin:0;padding:20px;border-radius:var(--card-radius);background:rgb(0 0 0 / .32);color:#e8e8e8;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;max-height:520px;overflow:auto;white-space:pre}
 .code2{display:grid;grid-template-columns:1fr 1fr;gap:var(--layout-gutter)}
 .code2>div{min-width:0}
+.two>*,.split>*,.colour-hero>*,.comp-hero>*,.voice-split>*,.families>*,.rules>*{min-width:0}
+li,td{overflow-wrap:anywhere}
 footer.site{padding:48px 0;background:var(--ground-dark);color:var(--ink-dark);font-size:14px}
 footer.site .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s var(--motion-ease),transform .9s var(--motion-ease)}
@@ -158,7 +163,8 @@ footer.site .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;j
   .cover .wrap{grid-template-columns:1fr}
   .mosaic{grid-template-columns:repeat(2,1fr);grid-auto-rows:120px}.mosaic>*{grid-column:span 1 !important;grid-row:span 1 !important}.mosaic .m1{grid-column:span 2 !important;grid-row:span 2 !important}
 }
-@media (max-width:520px){.ground .cards2{grid-template-columns:1fr}.stats{gap:10px}.stat{padding:20px 8px}.token-card{min-width:0;max-width:none}}
+@media (max-width:520px){.ground>.rb-btn{justify-self:start}
+.ground .cards2{grid-template-columns:1fr}.stats{gap:10px}.stat{padding:20px 8px}.token-card{min-width:0;max-width:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}.reveal{opacity:1;transform:none}}
 `;
 }
@@ -178,6 +184,7 @@ function renderGuide(ctx) {
   const colourCount = a.colour.palette.length;
   const date = (a.capturedAt || '').slice(0, 10);
   const host = esc(a.host);
+  const primaryLabel = (variants.primary.source && variants.primary.source.labels[0]) || 'Primary action';
   const tk = Object.fromEntries(tokens.map((t) => [`${t.group}-${t.name}`, t.value]));
   const inkFor = (hex) => (C.contrast(hex, R.text.hex) >= C.contrast(hex, R['text-inverse'].hex) ? 'var(--color-text)' : 'var(--color-text-inverse)');
   const shortSample = (s, fallback) => { const w = String(s || '').split(/\s+/).filter(Boolean); return w.length >= 2 ? w.slice(0, 9).join(' ') : fallback; };
@@ -250,7 +257,7 @@ function renderGuide(ctx) {
   <div class="sec-head"><div><p class="eyebrow">Token rebuild test</p><h2 class="t-h1">Token rebuild test</h2></div><p class="muted">A button and two cards built only from the exported variables, on the site's light and dark grounds.</p></div>
   <div class="split">
     <div class="ground light reveal">
-      <a class="rb-btn" id="rebuild-btn" href="#tokens">${esc((variants.primary && a.components.buttons[0] && a.components.buttons[0].labels[0]) || 'Primary action')}</a>
+      <a class="rb-btn" id="rebuild-btn" href="#tokens">${esc(primaryLabel)}</a>
       <div class="cards2">
         <article class="rb-card" id="rebuild-card"><div class="rb-card__media img img-subject" data-slot="subject"${has('subject') ? ' data-ai="1"' : ''}>${label('subject')}</div><h3 class="t-h4">Card from tokens</h3><p class="t-small muted">radius ${esc(tk['radius-card'])} · padding ${esc(tk['card-padding'])}</p></article>
         <article class="rb-card"><div class="rb-card__media img img-street" data-slot="street"${has('street') ? ' data-ai="1"' : ''}>${label('street')}</div><h3 class="t-h4">Second card</h3><p class="t-small muted">shadow ${esc(String(tk['card-shadow']).slice(0, 28))}</p></article>
@@ -258,7 +265,7 @@ function renderGuide(ctx) {
       <div class="check" id="rebuild-check">Checking computed styles…</div>
     </div>
     <div class="ground dark on-dark reveal">
-      <a class="rb-btn" href="#tokens">${esc((a.components.buttons[0] && a.components.buttons[0].labels[0]) || 'Primary action')}</a>
+      <a class="rb-btn" href="#tokens">${esc(primaryLabel)}</a>
       <div class="cards2">
         <article class="rb-card"><div class="rb-card__media img img-sky" data-slot="sky"${has('sky') ? ' data-ai="1"' : ''}>${label('sky')}</div><h3 class="t-h4">Card on dark</h3><p class="t-small muted">ground var(--color-surface-inverse)</p></article>
         <article class="rb-card"><div class="rb-card__media img img-object" data-slot="object"${has('object') ? ' data-ai="1"' : ''}>${label('object')}</div><h3 class="t-h4">Second card</h3><p class="t-small muted">same tokens, inverse ground</p></article>
@@ -332,8 +339,8 @@ function renderGuide(ctx) {
     <div><h3 class="t-h3">Radii</h3><div class="radii">${a.layout.radii.slice(0, 6).map((r) => `<div class="radius" style="border-radius:${r.value === 'pill' ? '999px' : r.value + 'px'}">${r.value === 'pill' ? 'pill' : r.value + 'px'}<br>${r.count}×</div>`).join('')}</div>
       <p class="muted t-small" style="margin-top:16px">Pill share ${pct(a.layout.pillShare)}. Card radius ${a.layout.cardRadius}px.</p></div>
   </div>
-  <div class="block"><h3 class="t-h3">Breakpoints</h3>${a.layout.breakpoints.length ? `<div class="ruler">${a.layout.breakpoints.map((b) => `<span style="left:${((b - 320) / (1920 - 320)) * 100}%">${b}</span>`).join('')}</div><p class="muted t-small" style="margin-top:12px">Scale 320px to 1920px. Read from same-origin stylesheets only.</p>` : '<p class="muted">No media queries were readable.</p>'}</div>
-  <div class="block"><h3 class="t-h3">Section rhythm (home page)</h3><div class="rhythm">${a.layout.rhythm.map((b) => `<div style="height:${Math.max(22, Math.round(b.share * 420))}px;background:${b.bg};color:${C.isDark(b.bg) || C.chroma(b.bg) > 0.1 ? '#fff' : '#111'}"><span>${b.tone}${b.gradient ? ' · gradient' : ''}${b.image ? ' · image' : ''}</span><span>${b.h}px</span></div>`).join('')}</div></div>
+  <div class="block"><h3 class="t-h3">Breakpoints</h3>${a.layout.breakpoints.length ? `<div class="ruler">${a.layout.breakpoints.filter((b, i, arr) => !i || b - arr[i - 1] > 8).map((b) => `<span style="left:${((b - 320) / (1920 - 320)) * 100}%">${b}</span>`).join('')}</div><p class="muted t-small" style="margin-top:12px">Scale 320px to 1920px. Read from same-origin stylesheets only.</p>` : '<p class="muted">No media queries were readable.</p>'}</div>
+  <div class="block"><h3 class="t-h3">Section rhythm (home page)</h3><div class="rhythm">${a.layout.rhythm.filter((b) => b.h >= 20).map((b) => `<div style="height:${Math.max(22, Math.round(b.share * 420))}px;background:${b.bg};color:${C.isDark(b.bg) || C.chroma(b.bg) > 0.1 ? '#fff' : '#111'}"><span>${b.tone}${b.gradient ? ' · gradient' : ''}${b.image ? ' · image' : ''}</span><span>${b.h}px</span></div>`).join('')}</div></div>
 </div></section>
 
 <section id="components" class="page auto on-dark"><div class="wrap">
@@ -342,12 +349,12 @@ function renderGuide(ctx) {
     ${photo('glass', 'reveal')}
   </div>
   <h3 class="t-h3" style="margin-bottom:20px">Buttons</h3>
-  <div class="variants">${['primary', 'secondary', 'outline', 'translucent'].map((k) => { const v = variants[k]; const m = v.source || null; return `<div class="variant${C.isDark(v.ground && v.ground.startsWith('#') ? v.ground.slice(0, 7) : '#000000') ? ' on-dark' : ''}" style="background:var(--button-${k}-ground)"><span class="rb-btn${k === 'primary' ? '' : ' rb-btn--' + k}">${esc((m && m.labels[0]) || k)}</span><div class="mono">${k}${v.measured ? '' : ' · inferred'}<br>${m ? `${m.count}× · ${m.height}px high · ${m.pill ? 'pill' : m.radius + 'px'}` : ''}</div></div>`; }).join('')}</div>
-  <div class="block"><h3 class="t-h3">Navigation</h3><div class="navmock"><span class="logo-ph">logo ${esc(tk['nav-logo-width'])}×${esc(tk['nav-logo-height'])}</span><span class="links">${(a.components.nav ? a.components.nav.links : ['Link', 'Link', 'Link']).slice(0, 5).map((l) => `<a href="#components">${esc(l)}</a>`).join('')}</span><span class="rb-btn">${esc((a.components.buttons.find((b) => b.kind === 'filled') || { labels: ['Action'] }).labels[0])}</span></div>
-    <p class="muted t-small" style="margin-top:12px">Height ${esc(tk['nav-height'])}${a.components.nav ? `, ${a.components.nav.sticky ? 'sticky' : 'static'}` : ''}. Logo shown as a dashed placeholder at its measured size and colour (${esc(tk['nav-logo-color'])}).</p></div>
+  <div class="variants">${['primary', 'secondary', 'outline', 'translucent'].map((k) => { const v = variants[k]; const m = v.source || null; return `<div class="variant ${C.isDark(v.ground && v.ground.startsWith('#') ? v.ground.slice(0, 7) : '#000000') || C.chroma(v.ground && v.ground.startsWith('#') ? v.ground.slice(0, 7) : '#000000') > 0.1 ? 'dark on-dark' : 'light'}" style="background:var(--button-${k}-ground)"><span class="rb-btn${k === 'primary' ? '' : ' rb-btn--' + k}">${esc((m && m.labels[0]) || k)}</span><div class="mono">${k}${v.measured ? '' : ' · inferred'}<br>${m ? `${m.count}× · ${m.height}px high · ${m.pill ? 'pill' : m.radius + 'px'}` : ''}</div></div>`; }).join('')}</div>
+  <div class="block"><h3 class="t-h3">Navigation</h3><div class="navmock"><span class="logo-ph">logo ${esc(tk['nav-logo-width'])}×${esc(tk['nav-logo-height'])}</span><span class="links">${(a.components.nav ? a.components.nav.links : ['Link', 'Link', 'Link']).slice(0, 5).map((l) => `<a href="#components">${esc(l)}</a>`).join('')}</span><span class="rb-btn">${esc(primaryLabel)}</span></div>
+    <p class="muted t-small" style="margin-top:12px">Height ${esc(tk['nav-height'])}${a.components.nav ? `, ${a.components.nav.sticky ? 'sticky' : 'static'}` : ''}. ${a.components.nav && a.components.nav.logo ? `Logo shown as a dashed placeholder at its measured size and colour (${esc(tk['nav-logo-color'])}).` : 'Logo not detected inside the header element; the dashed placeholder uses a default size (inferred).'}</p></div>
   <div class="two block">
     <div><h3 class="t-h3">Cards</h3><div class="ground light" style="padding:20px"><article class="rb-card"><div class="rb-card__media img img-subject"${has('subject') ? ' data-ai="1"' : ''}>${label('subject')}</div><h4 class="t-h4">Card</h4><p class="t-small muted">${a.components.cards.slice(0, 3).map((c) => `${c.fill}, ${c.radius}px${c.shadow ? ', shadow' : ''}${c.media ? ', media ' + (c.media.ratio || '') : ''}`).join(' · ') || 'inferred from tokens'}</p></article></div></div>
-    <div><h3 class="t-h3">Input${a.components.input.inferred ? '<span class="flag">inferred</span>' : ''}</h3><div class="form"><label class="t-small" for="demo-input">Search</label><input class="rb-input" id="demo-input" placeholder="${esc(a.components.input.placeholder || 'Placeholder')}"><span class="rb-btn" style="justify-self:start">${esc((a.components.buttons[0] || { labels: ['Submit'] }).labels[0])}</span></div></div>
+    <div><h3 class="t-h3">Input${a.components.input.inferred ? '<span class="flag">inferred</span>' : ''}</h3><div class="form"><label class="t-small" for="demo-input">Search</label><input class="rb-input" id="demo-input" placeholder="${esc(a.components.input.placeholder || 'Placeholder')}"><span class="rb-btn" style="justify-self:start">${esc(primaryLabel)}</span></div></div>
   </div>
 </div></section>
 
@@ -385,7 +392,7 @@ function renderGuide(ctx) {
       <tr><th>Lines with numbers</th><td>${pct(a.voice.stats.numbersShare)}</td></tr>
       <tr><th>"X, Y" headlines</th><td>${pct(a.voice.stats.xyPatternShare)}</td></tr>
       <tr><th>CTA first words</th><td>${a.voice.stats.ctaFirstWords.slice(0, 5).map((w) => `${esc(w.word)} (${w.count})`).join(', ')}</td></tr>
-      <tr><th>Exclamation marks</th><td>${a.voice.stats.exclamations} lines</td></tr>
+      <tr><th>Exclamation marks</th><td>${a.voice.stats.exclamations} of ${a.voice.stats.lines} lines</td></tr>
     </tbody></table>
   </div>
 </section>
