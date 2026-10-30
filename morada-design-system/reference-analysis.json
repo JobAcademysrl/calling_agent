@@ -1,0 +1,1504 @@
+{
+  "brand": "Immobiliare.it",
+  "host": "www.immobiliare.it",
+  "origin": "https://www.immobiliare.it",
+  "capturedAt": "2026-10-29T23:54:58.405Z",
+  "source": "devtools",
+  "pages": [
+    {
+      "url": "https://www.immobiliare.it/",
+      "title": "Case in vendita - Immobiliare.it",
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "elementsVisited": 1478,
+      "elementsVisible": 1053,
+      "excludedConsent": 1,
+      "scrollHeight": 15350
+    },
+    {
+      "url": "https://www.immobiliare.it/affitto-case/",
+      "title": "Case in affitto - Immobiliare.it",
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "elementsVisited": 1479,
+      "elementsVisible": 1054,
+      "excludedConsent": 1,
+      "scrollHeight": 15350
+    },
+    {
+      "url": "https://www.immobiliare.it/vendita-loft/",
+      "title": "Loft in vendita - Immobiliare.it",
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "elementsVisited": 1434,
+      "elementsVisible": 1011,
+      "excludedConsent": 1,
+      "scrollHeight": 15350
+    },
+    {
+      "url": "https://www.immobiliare.it/vendita-ville/",
+      "title": "Ville in vendita - Immobiliare.it",
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "elementsVisited": 1478,
+      "elementsVisible": 1053,
+      "excludedConsent": 1,
+      "scrollHeight": 15350
+    },
+    {
+      "url": "https://www.immobiliare.it/vendita-garage/",
+      "title": "Garage in vendita - Immobiliare.it",
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "elementsVisited": 1451,
+      "elementsVisible": 1028,
+      "excludedConsent": 1,
+      "scrollHeight": 15350
+    }
+  ],
+  "mobile": {
+    "url": "https://www.immobiliare.it/",
+    "viewport": {
+      "w": 390,
+      "h": 844
+    },
+    "elementsVisible": 1046,
+    "scrollWidth": 375
+  },
+  "picks": {
+    "picked": [
+      {
+        "href": "https://www.immobiliare.it/news/",
+        "text": "Vedi altre notizie",
+        "score": 10,
+        "why": [
+          "nav",
+          "keyword"
+        ],
+        "top": "/news"
+      },
+      {
+        "href": "https://www.immobiliare.it/affitto-case/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/affitto-case"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-loft/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-loft"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-ville/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-ville"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-garage/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-garage"
+      }
+    ],
+    "enough": true,
+    "candidates": [
+      {
+        "href": "https://www.immobiliare.it/news/",
+        "text": "Vedi altre notizie",
+        "score": 10,
+        "why": [
+          "nav",
+          "keyword"
+        ],
+        "top": "/news"
+      },
+      {
+        "href": "https://www.immobiliare.it/affitto-case/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/affitto-case"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-loft/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-loft"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-ville/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-ville"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-garage/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-garage"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-uffici/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-uffici"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-negozi/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-negozi"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-estero/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-estero"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-attici/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-attici"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-palazzi/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-palazzi"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-terreni/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-terreni"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-rustici/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-rustici"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-attivita/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-attivita"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-villette/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-villette"
+      },
+      {
+        "href": "https://www.immobiliare.it/nuove-costruzioni/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/nuove-costruzioni"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-magazzini/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-magazzini"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-capannoni/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-capannoni"
+      },
+      {
+        "href": "https://www.immobiliare.it/agenzie-immobiliari/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/agenzie-immobiliari"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-appartamenti/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-appartamenti"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-case-indipendenti/",
+        "text": "",
+        "score": 5,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-case-indipendenti"
+      },
+      {
+        "href": "https://www.immobiliare.it/pubblica-annuncio/?from=navbar",
+        "text": "PUBBLICA ANNUNCI",
+        "score": 5,
+        "why": [
+          "nav"
+        ],
+        "top": "/pubblica-annuncio"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-case/roma/",
+        "text": "",
+        "score": 4,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-case"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-case/lucca/",
+        "text": "",
+        "score": 4,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-case"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-case/prato/",
+        "text": "",
+        "score": 4,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-case"
+      },
+      {
+        "href": "https://www.immobiliare.it/vendita-case/genova/",
+        "text": "",
+        "score": 4,
+        "why": [
+          "keyword"
+        ],
+        "top": "/vendita-case"
+      }
+    ]
+  },
+  "type": {
+    "roles": {
+      "display": {
+        "family": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "primary": "Inter",
+        "size": 56,
+        "weight": 600,
+        "lineHeight": 1.2,
+        "letterSpacing": 0,
+        "transform": "none",
+        "sample": "Cerchi casa? Ti aiutiamo noi!",
+        "share": 0.009,
+        "clusterSizes": [
+          56
+        ],
+        "mobileSize": 40,
+        "mobileMatches": 7,
+        "clamp": "clamp(2.5rem, 2.129rem + 1.524vw, 3.5rem)"
+      },
+      "h1": {
+        "family": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "primary": "Inter",
+        "size": 40,
+        "weight": 600,
+        "lineHeight": 1.2,
+        "letterSpacing": 0,
+        "transform": "none",
+        "sample": "Immobili segreti",
+        "share": 0.017,
+        "clusterSizes": [
+          40
+        ],
+        "mobileSize": 24,
+        "mobileMatches": 10,
+        "clamp": "clamp(1.5rem, 1.129rem + 1.524vw, 2.5rem)"
+      },
+      "h2": {
+        "family": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "primary": "Inter",
+        "size": 24,
+        "weight": 600,
+        "lineHeight": 1.333,
+        "letterSpacing": -0.021,
+        "transform": "none",
+        "sample": "Ricerche frequenti",
+        "share": 0.035,
+        "clusterSizes": [
+          24
+        ],
+        "mobileSize": 20,
+        "mobileMatches": 7,
+        "clamp": "clamp(1.25rem, 1.157rem + 0.381vw, 1.5rem)"
+      },
+      "body": {
+        "family": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "primary": "Inter",
+        "size": 14,
+        "weight": 400,
+        "lineHeight": 1.143,
+        "letterSpacing": 0,
+        "transform": "none",
+        "sample": "Case - Appartamenti",
+        "share": 0.421,
+        "mobileSize": 14,
+        "mobileMatches": 220,
+        "clamp": "0.875rem"
+      },
+      "small": {
+        "family": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "primary": "Inter",
+        "size": 12,
+        "weight": 600,
+        "lineHeight": 1.333,
+        "letterSpacing": 0,
+        "transform": "none",
+        "sample": "Tassi d’Interesse e Rate",
+        "share": 0.007,
+        "mobileSize": 12,
+        "mobileMatches": 13,
+        "clamp": "0.75rem"
+      },
+      "lead": {
+        "family": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "primary": "Inter",
+        "size": 16,
+        "weight": 400,
+        "lineHeight": 1.5,
+        "letterSpacing": 0,
+        "transform": "none",
+        "sample": "Immobiliare.it è il N.1 in Italia",
+        "share": 0.284,
+        "mobileSize": 16,
+        "mobileMatches": 52,
+        "clamp": "1rem"
+      },
+      "h3": {
+        "family": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "primary": "Inter",
+        "size": 21.24,
+        "weight": 600,
+        "lineHeight": 1.333,
+        "letterSpacing": -0.021,
+        "transform": "none",
+        "sample": "",
+        "share": 0.035,
+        "inferred": true,
+        "mobileSize": 15.17,
+        "mobileInferred": true,
+        "clamp": "clamp(0.948rem, 0.807rem + 0.578vw, 1.328rem)"
+      },
+      "h4": {
+        "family": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "primary": "Inter",
+        "size": 18.8,
+        "weight": 600,
+        "lineHeight": 1.333,
+        "letterSpacing": -0.021,
+        "transform": "none",
+        "sample": "",
+        "share": 0.035,
+        "inferred": true,
+        "mobileSize": 14.7,
+        "mobileInferred": true,
+        "clamp": "clamp(0.919rem, 0.824rem + 0.39vw, 1.175rem)"
+      }
+    },
+    "bodySize": 14,
+    "ratio": 1.47,
+    "interval": {
+      "name": "perfect fifth",
+      "value": 1.5
+    },
+    "clusters": [
+      {
+        "top": 56,
+        "sizes": [
+          56
+        ],
+        "chars": 326
+      },
+      {
+        "top": 40,
+        "sizes": [
+          40
+        ],
+        "chars": 270
+      },
+      {
+        "top": 24,
+        "sizes": [
+          24
+        ],
+        "chars": 553
+      }
+    ],
+    "families": [
+      {
+        "family": "Inter",
+        "stack": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "share": 1,
+        "chars": 27609,
+        "weights": [
+          {
+            "weight": 400,
+            "share": 0.632
+          },
+          {
+            "weight": 600,
+            "share": 0.309
+          },
+          {
+            "weight": 500,
+            "share": 0.059
+          },
+          {
+            "weight": 700,
+            "share": 0.001
+          }
+        ],
+        "generic": false
+      }
+    ],
+    "typefaces": [
+      {
+        "family": "Inter",
+        "stack": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "share": 1,
+        "chars": 27609,
+        "weights": [
+          {
+            "weight": 400,
+            "share": 0.632
+          },
+          {
+            "weight": 600,
+            "share": 0.309
+          },
+          {
+            "weight": 500,
+            "share": 0.059
+          },
+          {
+            "weight": 700,
+            "share": 0.001
+          }
+        ],
+        "generic": false
+      }
+    ],
+    "typeVars": [],
+    "sizesInUse": [
+      {
+        "size": 14,
+        "share": 0.529
+      },
+      {
+        "size": 16,
+        "share": 0.328
+      },
+      {
+        "size": 20,
+        "share": 0.057
+      },
+      {
+        "size": 24,
+        "share": 0.035
+      },
+      {
+        "size": 56,
+        "share": 0.02
+      },
+      {
+        "size": 40,
+        "share": 0.017
+      },
+      {
+        "size": 12,
+        "share": 0.012
+      },
+      {
+        "size": 12.7,
+        "share": 0.002
+      }
+    ],
+    "charset": "!',-.0123456789?ABCDEFGILMNOPQRSTUVYabcdefghiklmnopqrstuvwxyz|©²àèù’“”€"
+  },
+  "colour": {
+    "roles": {
+      "background": {
+        "hex": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 0.0)",
+        "share": 0.42,
+        "basis": "painted area",
+        "inferred": false,
+        "contrastOnBackground": 4.92
+      },
+      "surface": {
+        "hex": "#e6f1f9",
+        "oklch": "oklch(95.2% 0.016 239.1)",
+        "share": 0.533,
+        "basis": "painted area",
+        "inferred": false,
+        "contrastOnBackground": 4.29
+      },
+      "surface-inverse": {
+        "hex": "#0074c1",
+        "oklch": "oklch(54.6% 0.147 248.1)",
+        "share": 0.008,
+        "basis": "painted area",
+        "inferred": false,
+        "contrastOnBackground": 4.92
+      },
+      "text": {
+        "hex": "#373c47",
+        "oklch": "oklch(35.6% 0.020 266.0)",
+        "share": 0.652,
+        "basis": "characters",
+        "inferred": false,
+        "contrastOnBackground": 11.05
+      },
+      "text-muted": {
+        "hex": "#60687a",
+        "oklch": "oklch(51.7% 0.030 266.4)",
+        "share": 0.068,
+        "basis": "characters",
+        "inferred": false,
+        "contrastOnBackground": 5.59
+      },
+      "text-inverse": {
+        "hex": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 0.0)",
+        "share": 0.044,
+        "basis": "characters",
+        "inferred": false,
+        "contrastOnBackground": 4.92
+      },
+      "action": {
+        "hex": "#e50013",
+        "oklch": "oklch(58.0% 0.237 27.7)",
+        "share": 0.333,
+        "basis": "buttons",
+        "inferred": false,
+        "contrastOnBackground": 4.84
+      },
+      "on-action": {
+        "hex": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 0.0)",
+        "share": 0.044,
+        "basis": "characters",
+        "inferred": false,
+        "contrastOnBackground": 4.92
+      },
+      "action-alt": {
+        "hex": "#d5d7dd",
+        "oklch": "oklch(87.9% 0.008 271.3)",
+        "share": 0.333,
+        "basis": "buttons",
+        "inferred": false,
+        "contrastOnBackground": 3.42
+      },
+      "accent": {
+        "hex": "#0074c1",
+        "oklch": "oklch(54.6% 0.147 248.1)",
+        "share": 0.132,
+        "basis": "mixed usage",
+        "inferred": false,
+        "contrastOnBackground": 4.92
+      },
+      "border": {
+        "hex": "#d5d7dd",
+        "oklch": "oklch(87.9% 0.008 271.3)",
+        "share": 1,
+        "basis": "border count",
+        "inferred": false,
+        "contrastOnBackground": 3.42
+      }
+    },
+    "gradients": [],
+    "contrastPairs": [
+      {
+        "fg": "#373c47",
+        "bg": "#ffffff",
+        "chars": 8875,
+        "share": 0.484,
+        "ratio": 11.05,
+        "level": "AAA"
+      },
+      {
+        "fg": "#0074c1",
+        "bg": "#ffffff",
+        "chars": 5361,
+        "share": 0.292,
+        "ratio": 4.92,
+        "level": "AA"
+      },
+      {
+        "fg": "#60687a",
+        "bg": "#ffffff",
+        "chars": 1589,
+        "share": 0.087,
+        "ratio": 5.59,
+        "level": "AA"
+      },
+      {
+        "fg": "#373c47",
+        "bg": "#e6f1f9",
+        "chars": 866,
+        "share": 0.047,
+        "ratio": 9.64,
+        "level": "AAA"
+      },
+      {
+        "fg": "#ffffff",
+        "bg": "#0074c1",
+        "chars": 682,
+        "share": 0.037,
+        "ratio": 4.92,
+        "level": "AA"
+      },
+      {
+        "fg": "#373c47",
+        "bg": "#fff1df",
+        "chars": 354,
+        "share": 0.019,
+        "ratio": 9.95,
+        "level": "AAA"
+      },
+      {
+        "fg": "#0074c1",
+        "bg": "#e6f1f9",
+        "chars": 209,
+        "share": 0.011,
+        "ratio": 4.29,
+        "level": "AA large"
+      },
+      {
+        "fg": "#ffffff",
+        "bg": "#e50013",
+        "chars": 174,
+        "share": 0.009,
+        "ratio": 4.84,
+        "level": "AA"
+      },
+      {
+        "fg": "#ffffff",
+        "bg": "#3390cd",
+        "chars": 111,
+        "share": 0.006,
+        "ratio": 3.49,
+        "level": "AA large"
+      },
+      {
+        "fg": "#373c47",
+        "bg": "#f5f6f7",
+        "chars": 70,
+        "share": 0.004,
+        "ratio": 10.22,
+        "level": "AAA"
+      }
+    ],
+    "palette": [
+      {
+        "hex": "#373c47",
+        "oklch": "oklch(35.6% 0.020 266.0)",
+        "weight": 0.27
+      },
+      {
+        "hex": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 0.0)",
+        "weight": 0.239
+      },
+      {
+        "hex": "#e6f1f9",
+        "oklch": "oklch(95.2% 0.016 239.1)",
+        "weight": 0.166
+      },
+      {
+        "hex": "#d5d7dd",
+        "oklch": "oklch(87.9% 0.008 271.3)",
+        "weight": 0.156
+      },
+      {
+        "hex": "#0074c1",
+        "oklch": "oklch(54.6% 0.147 248.1)",
+        "weight": 0.132
+      },
+      {
+        "hex": "#60687a",
+        "oklch": "oklch(51.7% 0.030 266.4)",
+        "weight": 0.025
+      },
+      {
+        "hex": "#fff1df",
+        "oklch": "oklch(96.4% 0.028 74.3)",
+        "weight": 0.011
+      },
+      {
+        "hex": "#3390cd",
+        "oklch": "oklch(62.7% 0.126 241.9)",
+        "weight": 0
+      },
+      {
+        "hex": "#e50013",
+        "oklch": "oklch(58.0% 0.237 27.7)",
+        "weight": 0
+      },
+      {
+        "hex": "#f5f6f7",
+        "oklch": "oklch(97.3% 0.002 247.8)",
+        "weight": 0
+      }
+    ],
+    "darkGroundShare": 0.009
+  },
+  "layout": {
+    "base": 8,
+    "gridShares": {
+      "2": 0.999,
+      "4": 0.999,
+      "8": 0.974
+    },
+    "onGrid": [
+      {
+        "value": 16,
+        "count": 2941
+      },
+      {
+        "value": 8,
+        "count": 2186
+      },
+      {
+        "value": 88,
+        "count": 60
+      },
+      {
+        "value": 24,
+        "count": 56
+      },
+      {
+        "value": 32,
+        "count": 40
+      },
+      {
+        "value": 80,
+        "count": 24
+      },
+      {
+        "value": 40,
+        "count": 11
+      },
+      {
+        "value": 56,
+        "count": 11
+      },
+      {
+        "value": 48,
+        "count": 8
+      },
+      {
+        "value": 64,
+        "count": 4
+      }
+    ],
+    "offGrid": [
+      {
+        "value": 4,
+        "count": 97
+      },
+      {
+        "value": 12,
+        "count": 40
+      },
+      {
+        "value": 68,
+        "count": 2
+      },
+      {
+        "value": 233,
+        "count": 2
+      },
+      {
+        "value": 393,
+        "count": 2
+      }
+    ],
+    "spaceScale": [
+      8,
+      16,
+      24,
+      32,
+      40,
+      48,
+      56,
+      64,
+      80,
+      88
+    ],
+    "radii": [
+      {
+        "value": 16,
+        "count": 114
+      },
+      {
+        "value": 8,
+        "count": 22
+      },
+      {
+        "value": "pill",
+        "count": 16
+      },
+      {
+        "value": 4,
+        "count": 9
+      },
+      {
+        "value": 32,
+        "count": 9
+      }
+    ],
+    "pillShare": 0.094,
+    "cardRadius": 16,
+    "container": 1080,
+    "columns": 2,
+    "gutter": 16,
+    "breakpoints": [
+      480,
+      600,
+      601,
+      750
+    ],
+    "rhythm": [
+      {
+        "top": 0,
+        "h": 900,
+        "share": 0.059,
+        "bg": "#ffffff",
+        "tone": "light",
+        "gradient": false,
+        "image": false,
+        "tag": "div"
+      },
+      {
+        "top": 672,
+        "h": 342,
+        "share": 0.022,
+        "bg": "#ffffff",
+        "tone": "light",
+        "gradient": false,
+        "image": false,
+        "tag": "section"
+      },
+      {
+        "top": 1014,
+        "h": 452,
+        "share": 0.029,
+        "bg": "#ffffff",
+        "tone": "light",
+        "gradient": false,
+        "image": false,
+        "tag": "section"
+      },
+      {
+        "top": 1465,
+        "h": 1660,
+        "share": 0.108,
+        "bg": "#ffffff",
+        "tone": "light",
+        "gradient": false,
+        "image": false,
+        "tag": "section"
+      },
+      {
+        "top": 3125,
+        "h": 3835,
+        "share": 0.25,
+        "bg": "#e6f1f9",
+        "tone": "light",
+        "gradient": false,
+        "image": false,
+        "tag": "div"
+      },
+      {
+        "top": 6961,
+        "h": 2035,
+        "share": 0.133,
+        "bg": "#ffffff",
+        "tone": "light",
+        "gradient": false,
+        "image": false,
+        "tag": "div"
+      },
+      {
+        "top": 8996,
+        "h": 2035,
+        "share": 0.133,
+        "bg": "#fff1df",
+        "tone": "light",
+        "gradient": false,
+        "image": false,
+        "tag": "div"
+      },
+      {
+        "top": 11031,
+        "h": 1532,
+        "share": 0.1,
+        "bg": "#ffffff",
+        "tone": "light",
+        "gradient": false,
+        "image": false,
+        "tag": "section"
+      },
+      {
+        "top": 12563,
+        "h": 2048,
+        "share": 0.133,
+        "bg": "#e6f1f9",
+        "tone": "light",
+        "gradient": false,
+        "image": false,
+        "tag": "div"
+      },
+      {
+        "top": 14611,
+        "h": 627,
+        "share": 0.041,
+        "bg": "#ffffff",
+        "tone": "light",
+        "gradient": false,
+        "image": false,
+        "tag": "section"
+      },
+      {
+        "top": 15350,
+        "h": 0,
+        "share": 0,
+        "bg": "#0074c1",
+        "tone": "colour",
+        "gradient": false,
+        "image": false,
+        "tag": "footer"
+      }
+    ],
+    "shadows": [
+      {
+        "shadow": "rgba(0, 49, 81, 0.16) 0px 0px 2px 0px, rgba(0, 49, 81, 0.12) 0px 1px 4px 0px",
+        "count": 105
+      },
+      {
+        "shadow": "rgba(0, 49, 81, 0.16) 0px 4px 8px 0px, rgba(0, 49, 81, 0.16) 0px 8px 24px 0px",
+        "count": 1
+      }
+    ],
+    "easing": "cubic-bezier(0.4, 0, 0.2, 1)",
+    "duration": "0.25s",
+    "easings": [
+      [
+        "cubic-bezier(0.4, 0, 0.2, 1)",
+        62
+      ],
+      [
+        "cubic-bezier(0.2, 0, 0, 1)",
+        21
+      ],
+      [
+        "ease",
+        9
+      ],
+      [
+        "cubic-bezier(0, 0, 0.2, 1)",
+        4
+      ]
+    ]
+  },
+  "components": {
+    "buttons": [
+      {
+        "kind": "outline",
+        "bg": "#ffffff",
+        "color": "#0074c1",
+        "borderColor": "#d5d7dd",
+        "borderWidth": 1,
+        "radius": 8,
+        "pill": false,
+        "count": 5,
+        "labels": [
+          "PUBBLICA ANNUNCI"
+        ],
+        "font": {
+          "family": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          "size": 14,
+          "weight": 500,
+          "letterSpacing": 0,
+          "transform": "uppercase"
+        },
+        "grounds": {
+          "#ffffff": 5
+        },
+        "backdrop": null,
+        "gradient": null,
+        "pages": 5,
+        "height": 40,
+        "padding": [
+          4,
+          16,
+          4,
+          16
+        ],
+        "ground": "#ffffff"
+      },
+      {
+        "kind": "outline",
+        "bg": null,
+        "color": "#0074c1",
+        "borderColor": "#d5d7dd",
+        "borderWidth": 1,
+        "radius": 8,
+        "pill": false,
+        "count": 5,
+        "labels": [
+          "profilo"
+        ],
+        "font": {
+          "family": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          "size": 14,
+          "weight": 500,
+          "letterSpacing": 0,
+          "transform": "uppercase"
+        },
+        "grounds": {
+          "#ffffff": 5
+        },
+        "backdrop": null,
+        "gradient": null,
+        "pages": 5,
+        "height": 40,
+        "padding": [
+          4,
+          0,
+          4,
+          0
+        ],
+        "ground": "#ffffff"
+      },
+      {
+        "kind": "filled",
+        "bg": "#e50013",
+        "color": "#ffffff",
+        "borderColor": null,
+        "borderWidth": 1,
+        "radius": 8,
+        "pill": false,
+        "count": 5,
+        "labels": [
+          "CERCA"
+        ],
+        "font": {
+          "family": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          "size": 14,
+          "weight": 500,
+          "letterSpacing": 0,
+          "transform": "uppercase"
+        },
+        "grounds": {
+          "#ffffff": 5
+        },
+        "backdrop": null,
+        "gradient": null,
+        "pages": 5,
+        "height": 48,
+        "padding": [
+          4,
+          16,
+          4,
+          16
+        ],
+        "ground": "#ffffff"
+      }
+    ],
+    "cards": [
+      {
+        "bg": "#ffffff",
+        "radius": 16,
+        "shadow": "rgba(0, 49, 81, 0.16) 0px 0px 2px 0px, rgba(0, 49, 81, 0.12) 0px 1px 4px 0px",
+        "backdrop": null,
+        "borderColor": null,
+        "media": null,
+        "padding": [
+          16,
+          16,
+          16,
+          16
+        ],
+        "count": 0,
+        "titles": [],
+        "ground": "#e6f1f9",
+        "fill": "solid",
+        "inferred": true
+      }
+    ],
+    "nav": {
+      "height": 56,
+      "sticky": false,
+      "bg": "#ffffff",
+      "ground": "#ffffff",
+      "backdrop": null,
+      "shadow": null,
+      "borderBottom": null,
+      "links": [
+        "PUBBLICA ANNUNCI"
+      ],
+      "linkStyle": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif|14|500|#0074c1|none|uppercase",
+      "logo": null
+    },
+    "input": {
+      "inferred": false,
+      "height": 40,
+      "radius": 0,
+      "pill": false,
+      "bg": "#ffffff",
+      "borderColor": "#d5d7dd",
+      "borderWidth": 1,
+      "padding": [
+        0,
+        8,
+        0,
+        8
+      ],
+      "font": {
+        "family": "Inter, \"Inter Fallback\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "size": 14,
+        "weight": 400,
+        "letterSpacing": 0,
+        "transform": "none"
+      },
+      "placeholder": "Inserisci comune, zona o descrivi cosa stai cercando",
+      "color": "#373c47"
+    }
+  },
+  "imagery": {
+    "count": 400,
+    "formats": [
+      {
+        "format": "png",
+        "share": 0.638
+      },
+      {
+        "format": "video",
+        "share": 0.113
+      },
+      {
+        "format": "webp",
+        "share": 0.088
+      },
+      {
+        "format": "svg",
+        "share": 0.063
+      },
+      {
+        "format": "unknown",
+        "share": 0.05
+      },
+      {
+        "format": "jpg",
+        "share": 0.05
+      }
+    ],
+    "crops": [
+      {
+        "crop": "panorama",
+        "share": 0.625
+      },
+      {
+        "crop": "1:1",
+        "share": 0.188
+      },
+      {
+        "crop": "16:9",
+        "share": 0.113
+      },
+      {
+        "crop": "21:9",
+        "share": 0.05
+      },
+      {
+        "crop": "3:2",
+        "share": 0.025
+      }
+    ],
+    "objectFit": [
+      {
+        "fit": "fill",
+        "share": 0.7
+      },
+      {
+        "fit": "cover",
+        "share": 0.188
+      },
+      {
+        "fit": "contain",
+        "share": 0.113
+      }
+    ],
+    "fullBleedShare": 0.025,
+    "inCardShare": 0.163,
+    "mediaAreaShare": 0.319,
+    "altCoverage": 0.888,
+    "altThemes": [
+      {
+        "word": "case",
+        "count": 35
+      },
+      {
+        "word": "immobiliare",
+        "count": 30
+      },
+      {
+        "word": "vendita",
+        "count": 20
+      },
+      {
+        "word": "appartamento",
+        "count": 20
+      },
+      {
+        "word": "asta",
+        "count": 20
+      },
+      {
+        "word": "casa",
+        "count": 20
+      },
+      {
+        "word": "gruppo",
+        "count": 20
+      },
+      {
+        "word": "italia",
+        "count": 15
+      },
+      {
+        "word": "milano",
+        "count": 10
+      },
+      {
+        "word": "buildingcase",
+        "count": 10
+      },
+      {
+        "word": "engel",
+        "count": 10
+      },
+      {
+        "word": "voelkers",
+        "count": 10
+      }
+    ],
+    "sourcePages": [
+      {
+        "url": "https://www.immobiliare.it/",
+        "title": "Case in vendita - Immobiliare.it",
+        "media": 80
+      },
+      {
+        "url": "https://www.immobiliare.it/affitto-case/",
+        "title": "Case in affitto - Immobiliare.it",
+        "media": 80
+      },
+      {
+        "url": "https://www.immobiliare.it/vendita-loft/",
+        "title": "Loft in vendita - Immobiliare.it",
+        "media": 80
+      },
+      {
+        "url": "https://www.immobiliare.it/vendita-ville/",
+        "title": "Ville in vendita - Immobiliare.it",
+        "media": 80
+      },
+      {
+        "url": "https://www.immobiliare.it/vendita-garage/",
+        "title": "Garage in vendita - Immobiliare.it",
+        "media": 80
+      }
+    ]
+  },
+  "voice": {
+    "stats": {
+      "lines": 34,
+      "headlines": 25,
+      "headlineWords": {
+        "mean": 4.56,
+        "median": 5,
+        "max": 9
+      },
+      "case": {
+        "sentence": 1
+      },
+      "you": 6,
+      "we": 1,
+      "numbersShare": 0.147,
+      "xyPatternShare": 0,
+      "exclamations": 1,
+      "ctaCount": 3,
+      "ctaFirstWords": [
+        {
+          "word": "pubblica",
+          "count": 1
+        },
+        {
+          "word": "profilo",
+          "count": 1
+        },
+        {
+          "word": "cerca",
+          "count": 1
+        }
+      ],
+      "ctaMeanWords": 1.33
+    },
+    "quotes": [
+      {
+        "text": "Devi acquistare casa?",
+        "url": "https://www.immobiliare.it/",
+        "kind": "h1",
+        "words": 3
+      },
+      {
+        "text": "Cerca, confronta e richiedi il mutuo. Veloce. Online. Gratis.",
+        "url": "https://www.immobiliare.it/",
+        "kind": "h1",
+        "words": 9
+      },
+      {
+        "text": "Cerchi casa? Ti aiutiamo noi!",
+        "url": "https://www.immobiliare.it/",
+        "kind": "h1",
+        "words": 5
+      },
+      {
+        "text": "Case in affitto su Immobiliare.it",
+        "url": "https://www.immobiliare.it/affitto-case/",
+        "kind": "h2",
+        "words": 5
+      },
+      {
+        "text": "Disegna su mappa",
+        "url": "https://www.immobiliare.it/",
+        "kind": "h1",
+        "words": 3
+      }
+    ],
+    "rules": [
+      {
+        "n": 1,
+        "title": "Use sentence case for headlines",
+        "evidence": "100% of 25 headlines are sentence case."
+      },
+      {
+        "n": 2,
+        "title": "Keep headlines to about 5 words",
+        "evidence": "Median 5 words, mean 4.56, longest 9."
+      },
+      {
+        "n": 3,
+        "title": "Address the reader directly",
+        "evidence": "Second-person forms: 6. First-person plural forms: 1."
+      }
+    ]
+  },
+  "rootVarsCount": 16,
+  "assumptions": [
+    {
+      "area": "Typography",
+      "text": "Found 3 heading size clusters; missing heading roles are interpolated from the measured scale and flagged inferred."
+    },
+    {
+      "area": "Typography",
+      "text": "Mobile sizes matched by identical text for 6 of 8 roles; others scaled by the median heading ratio 0.71."
+    },
+    {
+      "area": "Layout",
+      "text": "Most common grid gap is 8px (compact UI rows); gutter = the most common gap of 16px or more (16px)."
+    },
+    {
+      "area": "Components",
+      "text": "No repeated card elements detected; card inferred from the most common radius (16px), the most common shadow and the background colour."
+    }
+  ]
+}

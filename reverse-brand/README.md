@@ -63,3 +63,12 @@ slots, 1400px others).
 - `src/slides.js`, `src/video.js` social exports and the frame-accurate video
 - `verify.js` checks and review screenshots
 - `test/` a fictional fixture site for local runs (`node test/serve-fixture.js`)
+
+## Deriving a design system for another brand
+
+`bin/derive-system.js <analysis.json> <identity.json> <out-dir>` keeps a brand's identity
+(colours for dark and light themes, fonts, button shape, logo, copy) and adopts the structure
+measured on a reference site: type ratios, spacing grid, radii, control and header heights,
+motion and voice rules. It writes `tokens.css`, `tokens.json`, `<name>-bridge.css` (aliases from
+the brand's existing CSS variables to the tokens) and `design-system.html`.
+See `../morada-design-system/` for an example.

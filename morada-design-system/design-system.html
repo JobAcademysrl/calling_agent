@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morada design system</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>
+/* Morada design tokens v1. Identity: Morada. Structure (type ratios, 8px grid, radii, component sizes, motion)
+   derived from measurements of a reference portal; no colours, fonts, images or copy taken from it. */
+:root {
+  /* font */
+  --font-display: 'Bricolage Grotesque', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Figtree', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  /* type */
+  --type-display-size: clamp(2.875rem, 2.457rem + 1.714vw, 4rem); /* 46px @390 -> 64px @1440 · ref 56px */
+  --type-display-weight: 700;
+  --type-display-leading: 1.2;
+  --type-display-tracking: -0.02em;
+  --type-display-family: var(--font-display);
+  --type-h1-size: clamp(1.625rem, 1.207rem + 1.714vw, 2.75rem); /* 26px @390 -> 44px @1440 · ref 40px */
+  --type-h1-weight: 700;
+  --type-h1-leading: 1.2;
+  --type-h1-tracking: -0.02em;
+  --type-h1-family: var(--font-display);
+  --type-h2-size: clamp(1.5rem, 1.407rem + 0.381vw, 1.75rem); /* 24px @390 -> 28px @1440 · ref 24px */
+  --type-h2-weight: 650;
+  --type-h2-leading: 1.333;
+  --type-h2-tracking: -0.02em;
+  --type-h2-family: var(--font-display);
+  --type-h3-size: clamp(1.125rem, 0.986rem + 0.571vw, 1.5rem); /* 18px @390 -> 24px @1440 · ref 21.24px (inferred) */
+  --type-h3-weight: 600;
+  --type-h3-leading: 1.333;
+  --type-h3-tracking: -0.02em;
+  --type-h3-family: var(--font-display);
+  --type-h4-size: clamp(1rem, 0.907rem + 0.381vw, 1.25rem); /* 16px @390 -> 20px @1440 · ref 18.8px (inferred) */
+  --type-h4-weight: 600;
+  --type-h4-leading: 1.333;
+  --type-h4-tracking: -0.02em;
+  --type-h4-family: var(--font-display);
+  --type-lead-size: 1.125rem; /* 18px @390 -> 18px @1440 · ref 16px */
+  --type-lead-weight: 400;
+  --type-lead-leading: 1.5;
+  --type-lead-tracking: 0em;
+  --type-lead-family: var(--font-body);
+  --type-body-size: 1rem; /* 16px @390 -> 16px @1440 · ref 14px */
+  --type-body-weight: 400;
+  --type-body-leading: 1.5;
+  --type-body-tracking: 0em;
+  --type-body-family: var(--font-body);
+  --type-small-size: 0.875rem; /* 14px @390 -> 14px @1440 · ref 12px */
+  --type-small-weight: 400;
+  --type-small-leading: 1.5;
+  --type-small-tracking: 0em;
+  --type-small-family: var(--font-body);
+  /* color */
+  --color-background: #0a1024; /* oklch(18.0% 0.042 269.3) */
+  --color-background-2: #0f1733; /* oklch(21.5% 0.056 269.3) */
+  --color-surface: #121b3a; /* oklch(23.3% 0.061 269.1) */
+  --color-surface-glass: rgba(255, 255, 255, 0.045);
+  --color-text: #eef1fb; /* oklch(95.9% 0.014 272.7) */
+  --color-text-muted: #9ba6c6; /* oklch(72.7% 0.048 270.3) */
+  --color-text-faint: #6c7799; /* oklch(57.3% 0.054 270.7) */
+  --color-accent: #f4a640; /* oklch(78.4% 0.146 69.5) */
+  --color-on-accent: #1a1203; /* oklch(18.8% 0.032 83.9) */
+  --color-accent-soft: rgba(244, 166, 64, 0.14);
+  --color-trust: #4fd1a5; /* oklch(77.7% 0.131 167.1) */
+  --color-on-trust: #04140e; /* oklch(17.4% 0.027 168.1) */
+  --color-danger: #ff7a7a; /* oklch(73.5% 0.163 21.9) */
+  --color-info: #7fa7ff; /* oklch(73.6% 0.136 264.7) */
+  --color-border: rgba(200, 212, 255, 0.12);
+  --color-border-strong: rgba(200, 212, 255, 0.22);
+  /* gradient */
+  --gradient-brand: linear-gradient(180deg, #121a45 0%, #3b2a6b 38%, #c2577a 72%, #f4a640 100%);
+  /* space */
+  --space-base: 8px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 88px;
+  /* layout */
+  --layout-container: 1240px; /* identity */
+  --layout-gutter: 16px;
+  --layout-gutter-wide: 24px;
+  --layout-bp-1: 480px;
+  --layout-bp-2: 600px;
+  --layout-bp-3: 750px;
+  --layout-bp-4: 1024px;
+  /* radius */
+  --radius-card: 16px;
+  --radius-sm: 8px;
+  --radius-button: 999px; /* identity: pill */
+  --radius-input: 8px;
+  --radius-pill: 999px;
+  /* button */
+  --button-height: 48px;
+  --button-height-sm: 32px;
+  --button-pad-x: 24px;
+  --button-font-weight: 600;
+  /* input */
+  --input-height: 48px;
+  --input-pad-x: 16px;
+  /* nav */
+  --nav-height: 56px;
+  --nav-height-mobile: 48px;
+  /* card */
+  --card-padding: 16px;
+  --card-media-ratio: 16 / 10;
+  /* motion */
+  --motion-ease: cubic-bezier(0.4, 0, 0.2, 1); /* reference */
+  --motion-duration: 0.25s;
+  --motion-duration-slow: 600ms;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --color-background: #f3f4fa; --color-background-2: #e9ecf6; --color-surface: #ffffff; --color-surface-glass: rgba(255, 255, 255, 0.78); --color-text: #141a35; --color-text-muted: #555f7f; --color-text-faint: #7d86a3; --color-accent: #b86a00; --color-on-accent: #ffffff; --color-accent-soft: rgba(184, 106, 0, 0.1); --color-trust: #0f8763; --color-on-trust: #ffffff; --color-danger: #c43d3d; --color-info: #2f5bd3; --color-border: rgba(22, 32, 74, 0.1); --color-border-strong: rgba(22, 32, 74, 0.2); color-scheme: light; } }
+:root[data-theme="light"] { --color-background: #f3f4fa; --color-background-2: #e9ecf6; --color-surface: #ffffff; --color-surface-glass: rgba(255, 255, 255, 0.78); --color-text: #141a35; --color-text-muted: #555f7f; --color-text-faint: #7d86a3; --color-accent: #b86a00; --color-on-accent: #ffffff; --color-accent-soft: rgba(184, 106, 0, 0.1); --color-trust: #0f8763; --color-on-trust: #ffffff; --color-danger: #c43d3d; --color-info: #2f5bd3; --color-border: rgba(22, 32, 74, 0.1); --color-border-strong: rgba(22, 32, 74, 0.2); color-scheme: light; }
+@media (max-width: 750px) { :root { --nav-height: var(--nav-height-mobile); } }
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--color-background);color:var(--color-text);font-family:var(--font-body);font-size:var(--type-body-size);line-height:var(--type-body-leading);overflow-x:hidden}
+h1,h2,h3,h4,p{margin:0}
+.wrap{max-width:var(--layout-container);margin:0 auto;padding:0 var(--layout-gutter)}
+section{padding:var(--space-10,88px) 0;border-top:1px solid var(--color-border)}
+.alt{background:var(--color-background-2)}
+.eyebrow{font:600 12px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent);margin-bottom:var(--space-2)}
+.t-display{font-family:var(--type-display-family);font-size:var(--type-display-size);font-weight:var(--type-display-weight);line-height:var(--type-display-leading);letter-spacing:var(--type-display-tracking)}
+.t-h1{font-family:var(--type-h1-family);font-size:var(--type-h1-size);font-weight:var(--type-h1-weight);line-height:var(--type-h1-leading);letter-spacing:var(--type-h1-tracking)}
+.t-h2{font-family:var(--type-h2-family);font-size:var(--type-h2-size);font-weight:var(--type-h2-weight);line-height:var(--type-h2-leading);letter-spacing:var(--type-h2-tracking)}
+.t-h3{font-family:var(--type-h3-family);font-size:var(--type-h3-size);font-weight:var(--type-h3-weight);line-height:var(--type-h3-leading);letter-spacing:var(--type-h3-tracking)}
+.t-h4{font-family:var(--type-h4-family);font-size:var(--type-h4-size);font-weight:var(--type-h4-weight);line-height:var(--type-h4-leading);letter-spacing:var(--type-h4-tracking)}
+.t-lead{font-size:var(--type-lead-size);line-height:var(--type-lead-leading)}
+.t-small{font-size:var(--type-small-size);line-height:var(--type-small-leading)}
+.muted{color:var(--color-text-muted)}
+.mono{font-family:var(--font-mono);font-size:13px}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:var(--space-3);margin-bottom:var(--space-6,48px)}
+.head p{max-width:52ch}
+.topbar{position:sticky;top:0;z-index:20;height:var(--nav-height);display:flex;align-items:center;background:color-mix(in srgb,var(--color-background) 80%,transparent);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--color-border)}
+.topbar .wrap{display:flex;align-items:center;gap:var(--space-3);width:100%}
+.brand{display:flex;align-items:center;gap:10px;font:700 20px/1 var(--font-display);text-decoration:none}
+.brand svg{width:28px;height:28px}
+.topbar nav{display:flex;gap:var(--space-3);margin-left:auto;font-size:14px;font-weight:500}
+.topbar nav a{text-decoration:none;color:var(--color-text-muted)}.topbar nav a:hover{color:var(--color-text)}
+@media (max-width:900px){.topbar nav{display:none}.topbar .btn{margin-left:auto}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-1);min-height:var(--button-height);padding:0 var(--button-pad-x);border-radius:var(--radius-button);border:1px solid var(--color-border-strong);background:var(--color-surface);color:var(--color-text);font:var(--button-font-weight) 15px/1 var(--font-body);text-decoration:none;cursor:pointer;white-space:nowrap;transition:transform var(--motion-duration) var(--motion-ease),box-shadow var(--motion-duration) var(--motion-ease),border-color var(--motion-duration) var(--motion-ease)}
+.btn:hover{transform:translateY(-1px);border-color:var(--color-text)}
+.btn-primary{background:var(--color-accent);color:var(--color-on-accent);border-color:transparent;box-shadow:0 10px 30px -12px var(--color-accent)}
+.btn-trust{background:var(--color-trust);color:var(--color-on-trust);border-color:transparent}
+.btn-ghost{background:transparent;border-color:transparent}
+.btn-sm{min-height:var(--button-height-sm);padding:0 var(--space-2);font-size:14px}
+.btn:focus-visible,.input:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+.input{width:100%;min-height:var(--input-height);padding:0 var(--input-pad-x);border-radius:var(--radius-input);border:1px solid var(--color-border-strong);background:var(--color-surface);color:var(--color-text);font:inherit}
+.cover{position:relative;min-height:88svh;display:flex;align-items:flex-end;padding:var(--space-10,88px) 0 var(--space-8,64px);background:var(--gradient-brand);color:#fff;overflow:hidden;border:0}
+.cover::after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(180deg,transparent,rgb(10 16 36 / .55));pointer-events:none}
+.cover .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:var(--space-4);align-items:end}
+.cover h1{max-width:13ch}
+.cover .lede{margin-top:var(--space-2);max-width:46ch;opacity:.92}
+.cover .actions{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-top:var(--space-4)}
+.glass{background:rgb(255 255 255 / .12);-webkit-backdrop-filter:blur(20px) saturate(1.4);backdrop-filter:blur(20px) saturate(1.4);border:1px solid rgb(255 255 255 / .25);border-radius:var(--radius-card);padding:var(--space-3);min-width:260px}
+.glass .sw{height:72px;border-radius:var(--radius-sm);background:var(--color-accent);margin:var(--space-2) 0}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:var(--layout-gutter-wide)}
+.split>*{min-width:0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--color-border);vertical-align:top;overflow-wrap:anywhere}
+th{color:var(--color-text-muted);font-weight:600}
+.scroll-x{overflow-x:auto}.scroll-x table{min-width:620px}
+.spec{display:grid;gap:var(--space-3)}
+.spec-row{display:grid;grid-template-columns:160px 1fr;gap:var(--space-3);align-items:baseline;padding-bottom:var(--space-2);border-bottom:1px solid var(--color-border)}
+.spec-row .meta{font:500 12px/1.5 var(--font-mono);color:var(--color-text-muted)}
+.spec-row>*{min-width:0;overflow-wrap:anywhere}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--space-1)}
+.swatch{border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--color-border);background:var(--color-surface)}
+.swatch i{display:block;height:72px}
+.swatch span{display:block;padding:var(--space-1);font:500 12px/1.4 var(--font-mono)}
+.themes{display:grid;grid-template-columns:1fr 1fr;gap:var(--layout-gutter)}
+.theme{border-radius:var(--radius-card);padding:var(--space-3);border:1px solid var(--color-border)}
+.stair{display:grid;gap:var(--space-1)}.stair div{display:grid;grid-template-columns:56px 1fr;gap:var(--space-2);align-items:center;font:500 12px/1 var(--font-mono)}.stair i{display:block;height:16px;border-radius:4px;background:var(--color-accent)}
+.radii{display:flex;flex-wrap:wrap;gap:var(--space-2)}.radii div{width:104px;height:104px;border:2px solid var(--color-text);display:grid;place-items:center;font:500 12px/1.3 var(--font-mono);text-align:center}
+.components{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-6,48px)}
+.row{display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center}
+.searchbar{display:flex;gap:var(--space-1);padding:var(--space-1);border-radius:calc(var(--radius-sm) + var(--space-1));background:var(--color-surface);border:1px solid var(--color-border-strong);max-width:760px}
+.searchbar .input{border:0;background:transparent}
+.searchbar select.input{max-width:150px;border-right:1px solid var(--color-border)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--layout-gutter)}
+.card{border-radius:var(--radius-card);overflow:hidden;background:var(--color-surface);border:1px solid var(--color-border);transition:transform var(--motion-duration-slow) var(--motion-ease),box-shadow var(--motion-duration) var(--motion-ease)}
+.card:hover{transform:translateY(-3px);box-shadow:0 24px 60px -24px rgb(0 0 0 / .5)}
+.card .media{aspect-ratio:var(--card-media-ratio);position:relative;background:var(--gradient-brand)}
+.card .media .chip{position:absolute;left:var(--space-1);top:var(--space-1)}
+.card .body{padding:var(--card-padding);display:grid;gap:6px}
+.price{font:600 20px/1.2 var(--font-mono)}.price small{font-size:13px;color:var(--color-text-muted);font-weight:500}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:var(--radius-pill);font-size:12px;font-weight:600;background:rgb(10 16 36 / .72);color:#fff}
+.chip-ok{background:var(--color-trust);color:var(--color-on-trust)}.chip-gold{background:var(--color-accent);color:var(--color-on-accent)}
+.navmock{display:flex;align-items:center;gap:var(--space-3);height:var(--nav-height);padding:0 var(--space-2);border-radius:var(--radius-card);background:var(--color-surface);border:1px solid var(--color-border);overflow:hidden;white-space:nowrap}
+.navmock a{text-decoration:none;font-size:14px;font-weight:500;color:var(--color-text-muted)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--layout-gutter)}
+.rule{padding:var(--space-3);border-radius:var(--radius-card);background:var(--color-surface);border:1px solid var(--color-border);display:grid;gap:var(--space-1);align-content:start}
+.rule b{font:700 32px/1 var(--font-display);color:var(--color-accent)}
+.rule .ex{font-family:var(--font-display);font-size:18px}
+pre{margin:0;padding:var(--space-3);border-radius:var(--radius-card);background:var(--color-background-2);border:1px solid var(--color-border);font:12px/1.55 var(--font-mono);max-height:460px;overflow:auto}
+.code2{display:grid;grid-template-columns:1fr 1fr;gap:var(--layout-gutter)}.code2>*{min-width:0}
+footer{padding:var(--space-6,48px) 0;border-top:1px solid var(--color-border);font-size:14px;color:var(--color-text-muted)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--motion-ease),transform .8s var(--motion-ease)}.reveal.in{opacity:1;transform:none}
+@media (max-width:900px){.split,.themes,.code2{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.cover .wrap{grid-template-columns:1fr}.spec-row{grid-template-columns:1fr}}
+@media (max-width:560px){.navmock a:not(.btn){display:none}.cards{grid-template-columns:1fr}.searchbar{flex-wrap:wrap}.searchbar select.input{max-width:none;border-right:0;border-bottom:1px solid var(--color-border)}.searchbar .btn{width:100%}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="brand" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd08a"/><stop offset="1" stop-color="#f4a640"/></linearGradient></defs><path d="M2 26 11 12l5 6 4-5 10 13Z" fill="url(#lg)"/><rect x="13" y="19" width="6" height="7" rx="1" fill="#0a1024" opacity=".85"/><circle cx="24" cy="7" r="3" fill="#ffd08a"/></svg>Morada</a><span class="mono muted">design system v1</span>
+  <nav><a href="#origine">Origine</a><a href="#tipografia">Tipografia</a><a href="#colore">Colore</a><a href="#layout">Layout</a><a href="#componenti">Componenti</a><a href="#voce">Voce</a><a href="#token">Token</a><a href="#migrazione">Migrazione</a></nav>
+  <button class="btn btn-sm" id="theme">Tema chiaro</button>
+</div></header>
+<main id="top">
+<section class="cover"><div class="wrap">
+  <div>
+    <p class="eyebrow" style="color:#fff;opacity:.85">Design system v1 · 2026-10-30</p>
+    <h1 class="t-display">Morada, sistema de diseño</h1>
+    <p class="t-lead lede">Identità di Morada, struttura misurata sul portale di riferimento: griglia a 8px, scala tipografica 1.47, controlli da 48px.</p>
+    <div class="actions"><a class="btn btn-primary" href="#componenti">Ver componentes</a><a class="btn" href="#token" style="background:rgb(255 255 255 / .14);color:#fff;border-color:rgb(255 255 255 / .3)">Token</a></div>
+  </div>
+  <div class="glass reveal"><div class="t-small" style="opacity:.85">Token</div><div class="sw"></div><code class="mono">--color-accent<br>#f4a640 · oklch(78.4% 0.146 69.5)</code></div>
+</div></section>
+
+<section id="origine"><div class="wrap">
+  <div class="head"><div><p class="eyebrow">Origine</p><h2 class="t-h1">Cosa viene da dove</h2></div><p class="muted">La struttura è misurata su www.immobiliare.it (5 pagine). Colori, font, logo, immagini e testi restano di Morada: nessun elemento visivo del portale di riferimento è stato copiato.</p></div>
+  <div class="scroll-x"><table><thead><tr><th>Aspetto</th><th>Misurato sul riferimento</th><th>Morada v1</th><th>Fonte</th></tr></thead><tbody>
+    <tr><td>Griglia di spaziatura</td><td>8px (97% dei valori)</td><td>8px · 8 / 16 / 24 / 32 / 40 / 48 / 56 / 64 / 80 / 88</td><td>struttura</td></tr>
+    <tr><td>Scala tipografica</td><td>rapporto 1.47, display 56px su corpo 14px</td><td>display 64px su corpo 16px</td><td>struttura</td></tr>
+    <tr><td>Altezza pulsanti e campi</td><td>CTA 48px, campo 40px</td><td>48px / 48px (oggi 44px)</td><td>struttura</td></tr>
+    <tr><td>Raggi</td><td>card 16px, piccoli 8px</td><td>card 16px (oggi 18px), campi 8px (oggi 11px)</td><td>struttura</td></tr>
+    <tr><td>Header</td><td>56px desktop, 48px mobile</td><td>56px / 48px (oggi 64px)</td><td>struttura</td></tr>
+    <tr><td>Movimento</td><td>cubic-bezier(0.4, 0, 0.2, 1), 0.25s</td><td>stessa curva e durata</td><td>struttura</td></tr>
+    <tr><td>Voce</td><td>sentence case, titoli di ~5 parole, seconda persona</td><td>stesse regole, in spagnolo con il "tú"</td><td>struttura</td></tr>
+    <tr><td>Colori</td><td>rosso e blu del riferimento: non usati</td><td>indaco notturno, oro, verde fiducia</td><td>Morada</td></tr>
+    <tr><td>Font</td><td>Inter: non usato</td><td>Bricolage Grotesque, Figtree, IBM Plex Mono</td><td>Morada</td></tr>
+    <tr><td>Forma dei pulsanti</td><td>rettangolare 8px: non usata</td><td>pillola</td><td>Morada</td></tr>
+  </tbody></table></div>
+  <ul class="muted t-small" style="margin-top:var(--space-3)"><li>Body and small leading raised to 1.5: the reference uses 1.143 for dense UI rows.</li><li>Type sizes = reference ratios to body (14px) applied to a 16px body, snapped to 4px (20px and up) or 2px.</li></ul>
+</div></section>
+
+<section id="tipografia" class="alt"><div class="wrap">
+  <div class="head"><div><p class="eyebrow">Tipografia</p><h2 class="t-h1">Tipografia</h2></div><p class="muted">Ogni ruolo alla sua dimensione reale, con clamp() tra 390px e 1440px.</p></div>
+  <div class="spec"><div class="spec-row reveal"><div><b>Display</b><div class="meta">46→64px · 700 · 1.2 · -0.02em<br>rif. 56px</div></div><p class="t-display">Encuentra tu casa en Venezuela</p></div><div class="spec-row reveal"><div><b>Titolo 1</b><div class="meta">26→44px · 700 · 1.2 · -0.02em<br>rif. 40px</div></div><p class="t-h1">Casas en venta en Caracas</p></div><div class="spec-row reveal"><div><b>Titolo 2</b><div class="meta">24→28px · 650 · 1.333 · -0.02em<br>rif. 24px</div></div><p class="t-h2">Apartamentos con título verificado</p></div><div class="spec-row reveal"><div><b>Titolo 3</b><div class="meta">18→24px · 600 · 1.333 · -0.02em<br>rif. 21.24px (inferred)</div></div><p class="t-h3">Precio en dólares y bolívares</p></div><div class="spec-row reveal"><div><b>Titolo 4</b><div class="meta">16→20px · 600 · 1.333 · -0.02em<br>rif. 18.8px (inferred)</div></div><p class="t-h4">Planta eléctrica y tanque</p></div><div class="spec-row reveal"><div><b>Lead</b><div class="meta">18→18px · 400 · 1.5 · 0em<br>rif. 16px</div></div><p class="t-lead">Busca, compara y contacta al agente en minutos. Sin sorpresas en el precio.</p></div><div class="spec-row reveal"><div><b>Corpo</b><div class="meta">16→16px · 400 · 1.5 · 0em<br>rif. 14px</div></div><p class="t-body">Cada anuncio muestra el precio en USD y en Bs. al tasa BCV del día, los servicios de la zona y el estado del título en el SAREN.</p></div><div class="spec-row reveal"><div><b>Piccolo</b><div class="meta">14→14px · 400 · 1.5 · 0em<br>rif. 12px</div></div><p class="t-small">Actualizado hoy · Tasa BCV de referencia</p></div></div>
+</div></section>
+
+<section id="colore"><div class="wrap">
+  <div class="head"><div><p class="eyebrow">Colore</p><h2 class="t-h1">Colore</h2></div><p class="muted">Palette di Morada, invariata. Tema scuro predefinito e tema chiaro.</p></div>
+  <div class="swatches"><div class="swatch"><i style="background:var(--color-background)"></i><span>background<br>#0a1024<br>#f3f4fa</span></div><div class="swatch"><i style="background:var(--color-background-2)"></i><span>background-2<br>#0f1733<br>#e9ecf6</span></div><div class="swatch"><i style="background:var(--color-surface)"></i><span>surface<br>#121b3a<br>#ffffff</span></div><div class="swatch"><i style="background:var(--color-surface-glass)"></i><span>surface-glass<br>rgba(255, 255, 255, 0.045)<br>rgba(255, 255, 255, 0.78)</span></div><div class="swatch"><i style="background:var(--color-text)"></i><span>text<br>#eef1fb<br>#141a35</span></div><div class="swatch"><i style="background:var(--color-text-muted)"></i><span>text-muted<br>#9ba6c6<br>#555f7f</span></div><div class="swatch"><i style="background:var(--color-text-faint)"></i><span>text-faint<br>#6c7799<br>#7d86a3</span></div><div class="swatch"><i style="background:var(--color-accent)"></i><span>accent<br>#f4a640<br>#b86a00</span></div><div class="swatch"><i style="background:var(--color-on-accent)"></i><span>on-accent<br>#1a1203<br>#ffffff</span></div><div class="swatch"><i style="background:var(--color-accent-soft)"></i><span>accent-soft<br>rgba(244, 166, 64, 0.14)<br>rgba(184, 106, 0, 0.1)</span></div><div class="swatch"><i style="background:var(--color-trust)"></i><span>trust<br>#4fd1a5<br>#0f8763</span></div><div class="swatch"><i style="background:var(--color-on-trust)"></i><span>on-trust<br>#04140e<br>#ffffff</span></div><div class="swatch"><i style="background:var(--color-danger)"></i><span>danger<br>#ff7a7a<br>#c43d3d</span></div><div class="swatch"><i style="background:var(--color-info)"></i><span>info<br>#7fa7ff<br>#2f5bd3</span></div><div class="swatch"><i style="background:var(--color-border)"></i><span>border<br>rgba(200, 212, 255, 0.12)<br>rgba(22, 32, 74, 0.1)</span></div><div class="swatch"><i style="background:var(--color-border-strong)"></i><span>border-strong<br>rgba(200, 212, 255, 0.22)<br>rgba(22, 32, 74, 0.2)</span></div></div>
+  <div class="themes" style="margin-top:var(--space-4)"><div class="theme" style="background:#0a1024;color:#eef1fb"><h3 class="t-h4" style="margin-bottom:var(--space-2)">Contrasto · tema scuro</h3><table style="color:inherit"><tbody><tr><td style="border-color:rgba(200, 212, 255, 0.22)"><span style="display:inline-block;padding:2px 10px;border-radius:6px;background:#0a1024;color:#eef1fb;border:1px solid rgba(200, 212, 255, 0.22)">Aa</span> text / background</td><td style="border-color:rgba(200, 212, 255, 0.22)">16.73:1</td><td style="border-color:rgba(200, 212, 255, 0.22)">AAA</td></tr><tr><td style="border-color:rgba(200, 212, 255, 0.22)"><span style="display:inline-block;padding:2px 10px;border-radius:6px;background:#0a1024;color:#9ba6c6;border:1px solid rgba(200, 212, 255, 0.22)">Aa</span> text-muted / background</td><td style="border-color:rgba(200, 212, 255, 0.22)">7.79:1</td><td style="border-color:rgba(200, 212, 255, 0.22)">AAA</td></tr><tr><td style="border-color:rgba(200, 212, 255, 0.22)"><span style="display:inline-block;padding:2px 10px;border-radius:6px;background:#f4a640;color:#1a1203;border:1px solid rgba(200, 212, 255, 0.22)">Aa</span> on-accent / accent</td><td style="border-color:rgba(200, 212, 255, 0.22)">9.17:1</td><td style="border-color:rgba(200, 212, 255, 0.22)">AAA</td></tr><tr><td style="border-color:rgba(200, 212, 255, 0.22)"><span style="display:inline-block;padding:2px 10px;border-radius:6px;background:#4fd1a5;color:#04140e;border:1px solid rgba(200, 212, 255, 0.22)">Aa</span> on-trust / trust</td><td style="border-color:rgba(200, 212, 255, 0.22)">9.89:1</td><td style="border-color:rgba(200, 212, 255, 0.22)">AAA</td></tr><tr><td style="border-color:rgba(200, 212, 255, 0.22)"><span style="display:inline-block;padding:2px 10px;border-radius:6px;background:#0a1024;color:#f4a640;border:1px solid rgba(200, 212, 255, 0.22)">Aa</span> accent / background</td><td style="border-color:rgba(200, 212, 255, 0.22)">9.33:1</td><td style="border-color:rgba(200, 212, 255, 0.22)">AAA</td></tr></tbody></table></div><div class="theme" style="background:#f3f4fa;color:#141a35"><h3 class="t-h4" style="margin-bottom:var(--space-2)">Contrasto · tema chiaro</h3><table style="color:inherit"><tbody><tr><td style="border-color:rgba(22, 32, 74, 0.2)"><span style="display:inline-block;padding:2px 10px;border-radius:6px;background:#f3f4fa;color:#141a35;border:1px solid rgba(22, 32, 74, 0.2)">Aa</span> text / background</td><td style="border-color:rgba(22, 32, 74, 0.2)">15.57:1</td><td style="border-color:rgba(22, 32, 74, 0.2)">AAA</td></tr><tr><td style="border-color:rgba(22, 32, 74, 0.2)"><span style="display:inline-block;padding:2px 10px;border-radius:6px;background:#f3f4fa;color:#555f7f;border:1px solid rgba(22, 32, 74, 0.2)">Aa</span> text-muted / background</td><td style="border-color:rgba(22, 32, 74, 0.2)">5.75:1</td><td style="border-color:rgba(22, 32, 74, 0.2)">AA</td></tr><tr><td style="border-color:rgba(22, 32, 74, 0.2)"><span style="display:inline-block;padding:2px 10px;border-radius:6px;background:#b86a00;color:#ffffff;border:1px solid rgba(22, 32, 74, 0.2)">Aa</span> on-accent / accent</td><td style="border-color:rgba(22, 32, 74, 0.2)">4.12:1</td><td style="border-color:rgba(22, 32, 74, 0.2)">AA large</td></tr><tr><td style="border-color:rgba(22, 32, 74, 0.2)"><span style="display:inline-block;padding:2px 10px;border-radius:6px;background:#0f8763;color:#ffffff;border:1px solid rgba(22, 32, 74, 0.2)">Aa</span> on-trust / trust</td><td style="border-color:rgba(22, 32, 74, 0.2)">4.50:1</td><td style="border-color:rgba(22, 32, 74, 0.2)">AA</td></tr><tr><td style="border-color:rgba(22, 32, 74, 0.2)"><span style="display:inline-block;padding:2px 10px;border-radius:6px;background:#f3f4fa;color:#b86a00;border:1px solid rgba(22, 32, 74, 0.2)">Aa</span> accent / background</td><td style="border-color:rgba(22, 32, 74, 0.2)">3.75:1</td><td style="border-color:rgba(22, 32, 74, 0.2)">AA large</td></tr></tbody></table></div></div>
+  <div style="margin-top:var(--space-4);height:120px;border-radius:var(--radius-card);background:var(--gradient-brand)"></div><p class="mono muted" style="margin-top:var(--space-1)">--gradient-brand: cielo dell'Ávila al tramonto</p>
+</div></section>
+
+<section id="layout" class="alt"><div class="wrap">
+  <div class="head"><div><p class="eyebrow">Layout e spaziatura</p><h2 class="t-h1">Layout e spaziatura</h2></div><p class="muted">Contenitore 1240px, gutter 16px (24px largo), breakpoint 480px, 600px, 750px, 1024px.</p></div>
+  <div class="split">
+    <div><h3 class="t-h4" style="margin-bottom:var(--space-2)">Scala</h3><div class="stair"><div><span>8px</span><i style="width:var(--space-1)"></i></div><div><span>16px</span><i style="width:var(--space-2)"></i></div><div><span>24px</span><i style="width:var(--space-3)"></i></div><div><span>32px</span><i style="width:var(--space-4)"></i></div><div><span>40px</span><i style="width:var(--space-5)"></i></div><div><span>48px</span><i style="width:var(--space-6)"></i></div><div><span>56px</span><i style="width:var(--space-7)"></i></div><div><span>64px</span><i style="width:var(--space-8)"></i></div><div><span>80px</span><i style="width:var(--space-9)"></i></div><div><span>88px</span><i style="width:var(--space-10)"></i></div></div></div>
+    <div><h3 class="t-h4" style="margin-bottom:var(--space-2)">Raggi</h3><div class="radii"><div style="border-radius:var(--radius-sm)">sm<br>8px</div><div style="border-radius:var(--radius-card)">card<br>16px</div><div style="border-radius:var(--radius-pill)">pill</div></div></div>
+  </div>
+</div></section>
+
+<section id="componenti"><div class="wrap">
+  <div class="head"><div><p class="eyebrow">Componenti</p><h2 class="t-h1">Componenti</h2></div><p class="muted">Ricerca in evidenza, CTA unico e card annuncio: lo schema del portale di riferimento con forme e colori di Morada.</p></div>
+  <div class="components">
+    <div><h3 class="t-h4" style="margin-bottom:var(--space-2)">Navigazione</h3><div class="navmock"><span class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd08a"/><stop offset="1" stop-color="#f4a640"/></linearGradient></defs><path d="M2 26 11 12l5 6 4-5 10 13Z" fill="url(#lg)"/><rect x="13" y="19" width="6" height="7" rx="1" fill="#0a1024" opacity=".85"/><circle cx="24" cy="7" r="3" fill="#ffd08a"/></svg>Morada</span><a href="#componenti">Comprar</a><a href="#componenti">Alquilar</a><a href="#componenti">Obra nueva</a><a href="#componenti">Valorar</a><a class="btn btn-primary btn-sm" style="margin-left:auto;color:var(--color-on-accent)" href="#componenti">Publicar</a></div></div>
+    <div><h3 class="t-h4" style="margin-bottom:var(--space-2)">Ricerca</h3><form class="searchbar" onsubmit="return false"><select class="input" aria-label="Operación"><option>Comprar</option><option>Alquilar</option></select><input class="input" placeholder="Ciudad, urbanización o zona" aria-label="Zona"><button class="btn btn-primary">Buscar</button></form></div>
+    <div><h3 class="t-h4" style="margin-bottom:var(--space-2)">Pulsanti</h3><div class="row"><span class="btn btn-primary">Buscar</span><span class="btn">Guardar búsqueda</span><span class="btn btn-trust">Verificar título</span><span class="btn btn-ghost">Ver en el mapa</span><span class="btn btn-sm">Filtros</span></div><p class="mono muted" style="margin-top:var(--space-1)">altezza 48px (piccolo 32px) · padding 24px · pillola · un solo primario per schermata</p></div>
+    <div><h3 class="t-h4" style="margin-bottom:var(--space-2)">Card annuncio</h3><div class="cards"><article class="card reveal"><div class="media"><span class="chip chip-ok">Título verificado</span></div><div class="body"><div class="price">US$ 85.000 <small>≈ Bs. 3,1 M</small></div><h4 class="t-h4">Apartamento en Los Palos Grandes</h4><p class="t-small muted">3 hab · 2 baños · 98 m² · planta eléctrica</p></div></article><article class="card reveal"><div class="media"><span class="chip chip-gold">Nuevo</span></div><div class="body"><div class="price">US$ 450/mes <small>≈ Bs. 16.400</small></div><h4 class="t-h4">Anexo en El Cafetal</h4><p class="t-small muted">1 hab · 1 baño · 40 m² · tanque</p></div></article><article class="card reveal"><div class="media"><span class="chip chip-ok">Título verificado</span></div><div class="body"><div class="price">US$ 210.000 <small>≈ Bs. 7,6 M</small></div><h4 class="t-h4">Casa en Valencia, El Viñedo</h4><p class="t-small muted">4 hab · 3 baños · 260 m² · pozo</p></div></article></div><p class="mono muted" style="margin-top:var(--space-1)">raggio 16px · media 16:10 · padding 16px · prezzo in mono USD + Bs.</p></div>
+  </div>
+</div></section>
+
+<section id="voce" class="alt"><div class="wrap">
+  <div class="head"><div><p class="eyebrow">Voce</p><h2 class="t-h1">Voce e tono</h2></div><p class="muted">Regole ricavate dalle misure sul riferimento (25 titoli: mediana 5 parole, 100% sentence case, seconda persona 6 contro 1), applicate allo spagnolo di Morada.</p></div>
+  <div class="rules"><div class="rule reveal"><b>01</b><h3 class="t-h4">Titoli in sentence case</h3><p class="t-small muted">Solo la prima parola e i nomi propri in maiuscolo, come il 100% dei titoli misurati.</p><p class="ex">Casas en venta en Maracaibo</p></div><div class="rule reveal"><b>02</b><h3 class="t-h4">Titoli di circa 5 parole</h3><p class="t-small muted">Mediana misurata: 5 parole; massimo 9. Il dettaglio va nel lead.</p><p class="ex">¿Buscas casa? Te ayudamos</p></div><div class="rule reveal"><b>03</b><h3 class="t-h4">Parla al lettore con il &quot;tú&quot;</h3><p class="t-small muted">Seconda persona dominante (6 contro 1). In Venezuela il &quot;tú&quot; è naturale nel digitale.</p><p class="ex">Publica tu inmueble en minutos</p></div><div class="rule reveal"><b>04</b><h3 class="t-h4">CTA che iniziano con un verbo</h3><p class="t-small muted">Etichette brevi (1–2 parole) all&#39;infinito o imperativo: Buscar, Publicar, Valorar.</p><p class="ex">Buscar · Publicar · Valorar</p></div><div class="rule reveal"><b>05</b><h3 class="t-h4">Niente punti esclamativi</h3><p class="t-small muted">Solo 1 riga su 34 nel riferimento ne usa uno: il tono resta pacato e affidabile.</p><p class="ex">Tu título, verificado en el SAREN.</p></div></div>
+</div></section>
+
+<section id="token"><div class="wrap">
+  <div class="head"><div><p class="eyebrow">Token</p><h2 class="t-h1">Token</h2></div><p class="muted">96 token in CSS e JSON W3C (OKLCH e valori del tema chiaro in $extensions).</p></div>
+  <div class="row" style="margin-bottom:var(--space-3)"><button class="btn btn-primary" data-dl="tokens.css">Scarica tokens.css</button><button class="btn" data-dl="tokens.json">Scarica tokens.json</button><button class="btn" data-dl="morada-bridge.css">Scarica morada-bridge.css</button></div>
+  <div class="code2"><pre id="src-tokens.css">/* Morada design tokens v1. Identity: Morada. Structure (type ratios, 8px grid, radii, component sizes, motion)
+   derived from measurements of a reference portal; no colours, fonts, images or copy taken from it. */
+:root {
+  /* font */
+  --font-display: &#39;Bricolage Grotesque&#39;, &#39;Avenir Next&#39;, &#39;Segoe UI&#39;, system-ui, sans-serif;
+  --font-body: &#39;Figtree&#39;, &#39;Segoe UI&#39;, system-ui, -apple-system, sans-serif;
+  --font-mono: &#39;IBM Plex Mono&#39;, ui-monospace, &#39;SFMono-Regular&#39;, Menlo, monospace;
+  /* type */
+  --type-display-size: clamp(2.875rem, 2.457rem + 1.714vw, 4rem); /* 46px @390 -&gt; 64px @1440 · ref 56px */
+  --type-display-weight: 700;
+  --type-display-leading: 1.2;
+  --type-display-tracking: -0.02em;
+  --type-display-family: var(--font-display);
+  --type-h1-size: clamp(1.625rem, 1.207rem + 1.714vw, 2.75rem); /* 26px @390 -&gt; 44px @1440 · ref 40px */
+  --type-h1-weight: 700;
+  --type-h1-leading: 1.2;
+  --type-h1-tracking: -0.02em;
+  --type-h1-family: var(--font-display);
+  --type-h2-size: clamp(1.5rem, 1.407rem + 0.381vw, 1.75rem); /* 24px @390 -&gt; 28px @1440 · ref 24px */
+  --type-h2-weight: 650;
+  --type-h2-leading: 1.333;
+  --type-h2-tracking: -0.02em;
+  --type-h2-family: var(--font-display);
+  --type-h3-size: clamp(1.125rem, 0.986rem + 0.571vw, 1.5rem); /* 18px @390 -&gt; 24px @1440 · ref 21.24px (inferred) */
+  --type-h3-weight: 600;
+  --type-h3-leading: 1.333;
+  --type-h3-tracking: -0.02em;
+  --type-h3-family: var(--font-display);
+  --type-h4-size: clamp(1rem, 0.907rem + 0.381vw, 1.25rem); /* 16px @390 -&gt; 20px @1440 · ref 18.8px (inferred) */
+  --type-h4-weight: 600;
+  --type-h4-leading: 1.333;
+  --type-h4-tracking: -0.02em;
+  --type-h4-family: var(--font-display);
+  --type-lead-size: 1.125rem; /* 18px @390 -&gt; 18px @1440 · ref 16px */
+  --type-lead-weight: 400;
+  --type-lead-leading: 1.5;
+  --type-lead-tracking: 0em;
+  --type-lead-family: var(--font-body);
+  --type-body-size: 1rem; /* 16px @390 -&gt; 16px @1440 · ref 14px */
+  --type-body-weight: 400;
+  --type-body-leading: 1.5;
+  --type-body-tracking: 0em;
+  --type-body-family: var(--font-body);
+  --type-small-size: 0.875rem; /* 14px @390 -&gt; 14px @1440 · ref 12px */
+  --type-small-weight: 400;
+  --type-small-leading: 1.5;
+  --type-small-tracking: 0em;
+  --type-small-family: var(--font-body);
+  /* color */
+  --color-background: #0a1024; /* oklch(18.0% 0.042 269.3) */
+  --color-background-2: #0f1733; /* oklch(21.5% 0.056 269.3) */
+  --color-surface: #121b3a; /* oklch(23.3% 0.061 269.1) */
+  --color-surface-glass: rgba(255, 255, 255, 0.045);
+  --color-text: #eef1fb; /* oklch(95.9% 0.014 272.7) */
+  --color-text-muted: #9ba6c6; /* oklch(72.7% 0.048 270.3) */
+  --color-text-faint: #6c7799; /* oklch(57.3% 0.054 270.7) */
+  --color-accent: #f4a640; /* oklch(78.4% 0.146 69.5) */
+  --color-on-accent: #1a1203; /* oklch(18.8% 0.032 83.9) */
+  --color-accent-soft: rgba(244, 166, 64, 0.14);
+  --color-trust: #4fd1a5; /* oklch(77.7% 0.131 167.1) */
+  --color-on-trust: #04140e; /* oklch(17.4% 0.027 168.1) */
+  --color-danger: #ff7a7a; /* oklch(73.5% 0.163 21.9) */
+  --color-info: #7fa7ff; /* oklch(73.6% 0.136 264.7) */
+  --color-border: rgba(200, 212, 255, 0.12);
+  --color-border-strong: rgba(200, 212, 255, 0.22);
+  /* gradient */
+  --gradient-brand: linear-gradient(180deg, #121a45 0%, #3b2a6b 38%, #c2577a 72%, #f4a640 100%);
+  /* space */
+  --space-base: 8px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 88px;
+  /* layout */
+  --layout-container: 1240px; /* identity */
+  --layout-gutter: 16px;
+  --layout-gutter-wide: 24px;
+  --layout-bp-1: 480px;
+  --layout-bp-2: 600px;
+  --layout-bp-3: 750px;
+  --layout-bp-4: 1024px;
+  /* radius */
+  --radius-card: 16px;
+  --radius-sm: 8px;
+  --radius-button: 999px; /* identity: pill */
+  --radius-input: 8px;
+  --radius-pill: 999px;
+  /* button */
+  --button-height: 48px;
+  --button-height-sm: 32px;
+  --button-pad-x: 24px;
+  --button-font-weight: 600;
+  /* input */
+  --input-height: 48px;
+  --input-pad-x: 16px;
+  /* nav */
+  --nav-height: 56px;
+  --nav-height-mobile: 48px;
+  /* card */
+  --card-padding: 16px;
+  --card-media-ratio: 16 / 10;
+  /* motion */
+  --motion-ease: cubic-bezier(0.4, 0, 0.2, 1); /* reference */
+  --motion-duration: 0.25s;
+  --motion-duration-slow: 600ms;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme=&quot;dark&quot;]) { --color-background: #f3f4fa; --color-background-2: #e9ecf6; --color-surface: #ffffff; --color-surface-glass: rgba(255, 255, 255, 0.78); --color-text: #141a35; --color-text-muted: #555f7f; --color-text-faint: #7d86a3; --color-accent: #b86a00; --color-on-accent: #ffffff; --color-accent-soft: rgba(184, 106, 0, 0.1); --color-trust: #0f8763; --color-on-trust: #ffffff; --color-danger: #c43d3d; --color-info: #2f5bd3; --color-border: rgba(22, 32, 74, 0.1); --color-border-strong: rgba(22, 32, 74, 0.2); color-scheme: light; } }
+:root[data-theme=&quot;light&quot;] { --color-background: #f3f4fa; --color-background-2: #e9ecf6; --color-surface: #ffffff; --color-surface-glass: rgba(255, 255, 255, 0.78); --color-text: #141a35; --color-text-muted: #555f7f; --color-text-faint: #7d86a3; --color-accent: #b86a00; --color-on-accent: #ffffff; --color-accent-soft: rgba(184, 106, 0, 0.1); --color-trust: #0f8763; --color-on-trust: #ffffff; --color-danger: #c43d3d; --color-info: #2f5bd3; --color-border: rgba(22, 32, 74, 0.1); --color-border-strong: rgba(22, 32, 74, 0.2); color-scheme: light; }
+@media (max-width: 750px) { :root { --nav-height: var(--nav-height-mobile); } }
+</pre><pre id="src-tokens.json">{
+  &quot;$description&quot;: &quot;Morada design tokens v1 (dark default; light values in $extensions).&quot;,
+  &quot;font&quot;: {
+    &quot;display&quot;: {
+      &quot;$value&quot;: &quot;&#39;Bricolage Grotesque&#39;, &#39;Avenir Next&#39;, &#39;Segoe UI&#39;, system-ui, sans-serif&quot;,
+      &quot;$type&quot;: &quot;fontFamily&quot;
+    },
+    &quot;body&quot;: {
+      &quot;$value&quot;: &quot;&#39;Figtree&#39;, &#39;Segoe UI&#39;, system-ui, -apple-system, sans-serif&quot;,
+      &quot;$type&quot;: &quot;fontFamily&quot;
+    },
+    &quot;mono&quot;: {
+      &quot;$value&quot;: &quot;&#39;IBM Plex Mono&#39;, ui-monospace, &#39;SFMono-Regular&#39;, Menlo, monospace&quot;,
+      &quot;$type&quot;: &quot;fontFamily&quot;
+    }
+  },
+  &quot;type&quot;: {
+    &quot;display-size&quot;: {
+      &quot;$value&quot;: &quot;clamp(2.875rem, 2.457rem + 1.714vw, 4rem)&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;note&quot;: &quot;46px @390 -&gt; 64px @1440 · ref 56px&quot;
+        }
+      }
+    },
+    &quot;display-weight&quot;: {
+      &quot;$value&quot;: &quot;700&quot;,
+      &quot;$type&quot;: &quot;fontWeight&quot;
+    },
+    &quot;display-leading&quot;: {
+      &quot;$value&quot;: &quot;1.2&quot;,
+      &quot;$type&quot;: &quot;number&quot;
+    },
+    &quot;display-tracking&quot;: {
+      &quot;$value&quot;: &quot;-0.02em&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;display-family&quot;: {
+      &quot;$value&quot;: &quot;{font.display}&quot;,
+      &quot;$type&quot;: &quot;fontFamily&quot;
+    },
+    &quot;h1-size&quot;: {
+      &quot;$value&quot;: &quot;clamp(1.625rem, 1.207rem + 1.714vw, 2.75rem)&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;note&quot;: &quot;26px @390 -&gt; 44px @1440 · ref 40px&quot;
+        }
+      }
+    },
+    &quot;h1-weight&quot;: {
+      &quot;$value&quot;: &quot;700&quot;,
+      &quot;$type&quot;: &quot;fontWeight&quot;
+    },
+    &quot;h1-leading&quot;: {
+      &quot;$value&quot;: &quot;1.2&quot;,
+      &quot;$type&quot;: &quot;number&quot;
+    },
+    &quot;h1-tracking&quot;: {
+      &quot;$value&quot;: &quot;-0.02em&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;h1-family&quot;: {
+      &quot;$value&quot;: &quot;{font.display}&quot;,
+      &quot;$type&quot;: &quot;fontFamily&quot;
+    },
+    &quot;h2-size&quot;: {
+      &quot;$value&quot;: &quot;clamp(1.5rem, 1.407rem + 0.381vw, 1.75rem)&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;note&quot;: &quot;24px @390 -&gt; 28px @1440 · ref 24px&quot;
+        }
+      }
+    },
+    &quot;h2-weight&quot;: {
+      &quot;$value&quot;: &quot;650&quot;,
+      &quot;$type&quot;: &quot;fontWeight&quot;
+    },
+    &quot;h2-leading&quot;: {
+      &quot;$value&quot;: &quot;1.333&quot;,
+      &quot;$type&quot;: &quot;number&quot;
+    },
+    &quot;h2-tracking&quot;: {
+      &quot;$value&quot;: &quot;-0.02em&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;h2-family&quot;: {
+      &quot;$value&quot;: &quot;{font.display}&quot;,
+      &quot;$type&quot;: &quot;fontFamily&quot;
+    },
+    &quot;h3-size&quot;: {
+      &quot;$value&quot;: &quot;clamp(1.125rem, 0.986rem + 0.571vw, 1.5rem)&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;note&quot;: &quot;18px @390 -&gt; 24px @1440 · ref 21.24px (inferred)&quot;
+        }
+      }
+    },
+    &quot;h3-weight&quot;: {
+      &quot;$value&quot;: &quot;600&quot;,
+      &quot;$type&quot;: &quot;fontWeight&quot;
+    },
+    &quot;h3-leading&quot;: {
+      &quot;$value&quot;: &quot;1.333&quot;,
+      &quot;$type&quot;: &quot;number&quot;
+    },
+    &quot;h3-tracking&quot;: {
+      &quot;$value&quot;: &quot;-0.02em&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;h3-family&quot;: {
+      &quot;$value&quot;: &quot;{font.display}&quot;,
+      &quot;$type&quot;: &quot;fontFamily&quot;
+    },
+    &quot;h4-size&quot;: {
+      &quot;$value&quot;: &quot;clamp(1rem, 0.907rem + 0.381vw, 1.25rem)&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;note&quot;: &quot;16px @390 -&gt; 20px @1440 · ref 18.8px (inferred)&quot;
+        }
+      }
+    },
+    &quot;h4-weight&quot;: {
+      &quot;$value&quot;: &quot;600&quot;,
+      &quot;$type&quot;: &quot;fontWeight&quot;
+    },
+    &quot;h4-leading&quot;: {
+      &quot;$value&quot;: &quot;1.333&quot;,
+      &quot;$type&quot;: &quot;number&quot;
+    },
+    &quot;h4-tracking&quot;: {
+      &quot;$value&quot;: &quot;-0.02em&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;h4-family&quot;: {
+      &quot;$value&quot;: &quot;{font.display}&quot;,
+      &quot;$type&quot;: &quot;fontFamily&quot;
+    },
+    &quot;lead-size&quot;: {
+      &quot;$value&quot;: &quot;1.125rem&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;note&quot;: &quot;18px @390 -&gt; 18px @1440 · ref 16px&quot;
+        }
+      }
+    },
+    &quot;lead-weight&quot;: {
+      &quot;$value&quot;: &quot;400&quot;,
+      &quot;$type&quot;: &quot;fontWeight&quot;
+    },
+    &quot;lead-leading&quot;: {
+      &quot;$value&quot;: &quot;1.5&quot;,
+      &quot;$type&quot;: &quot;number&quot;
+    },
+    &quot;lead-tracking&quot;: {
+      &quot;$value&quot;: &quot;0em&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;lead-family&quot;: {
+      &quot;$value&quot;: &quot;{font.body}&quot;,
+      &quot;$type&quot;: &quot;fontFamily&quot;
+    },
+    &quot;body-size&quot;: {
+      &quot;$value&quot;: &quot;1rem&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;note&quot;: &quot;16px @390 -&gt; 16px @1440 · ref 14px&quot;
+        }
+      }
+    },
+    &quot;body-weight&quot;: {
+      &quot;$value&quot;: &quot;400&quot;,
+      &quot;$type&quot;: &quot;fontWeight&quot;
+    },
+    &quot;body-leading&quot;: {
+      &quot;$value&quot;: &quot;1.5&quot;,
+      &quot;$type&quot;: &quot;number&quot;
+    },
+    &quot;body-tracking&quot;: {
+      &quot;$value&quot;: &quot;0em&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;body-family&quot;: {
+      &quot;$value&quot;: &quot;{font.body}&quot;,
+      &quot;$type&quot;: &quot;fontFamily&quot;
+    },
+    &quot;small-size&quot;: {
+      &quot;$value&quot;: &quot;0.875rem&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;note&quot;: &quot;14px @390 -&gt; 14px @1440 · ref 12px&quot;
+        }
+      }
+    },
+    &quot;small-weight&quot;: {
+      &quot;$value&quot;: &quot;400&quot;,
+      &quot;$type&quot;: &quot;fontWeight&quot;
+    },
+    &quot;small-leading&quot;: {
+      &quot;$value&quot;: &quot;1.5&quot;,
+      &quot;$type&quot;: &quot;number&quot;
+    },
+    &quot;small-tracking&quot;: {
+      &quot;$value&quot;: &quot;0em&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;small-family&quot;: {
+      &quot;$value&quot;: &quot;{font.body}&quot;,
+      &quot;$type&quot;: &quot;fontFamily&quot;
+    }
+  },
+  &quot;color&quot;: {
+    &quot;background&quot;: {
+      &quot;$value&quot;: &quot;#0a1024&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;oklch&quot;: &quot;oklch(18.0% 0.042 269.3)&quot;,
+          &quot;light&quot;: &quot;#f3f4fa&quot;
+        }
+      }
+    },
+    &quot;background-2&quot;: {
+      &quot;$value&quot;: &quot;#0f1733&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;oklch&quot;: &quot;oklch(21.5% 0.056 269.3)&quot;,
+          &quot;light&quot;: &quot;#e9ecf6&quot;
+        }
+      }
+    },
+    &quot;surface&quot;: {
+      &quot;$value&quot;: &quot;#121b3a&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;oklch&quot;: &quot;oklch(23.3% 0.061 269.1)&quot;,
+          &quot;light&quot;: &quot;#ffffff&quot;
+        }
+      }
+    },
+    &quot;surface-glass&quot;: {
+      &quot;$value&quot;: &quot;rgba(255, 255, 255, 0.045)&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;light&quot;: &quot;rgba(255, 255, 255, 0.78)&quot;
+        }
+      }
+    },
+    &quot;text&quot;: {
+      &quot;$value&quot;: &quot;#eef1fb&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;oklch&quot;: &quot;oklch(95.9% 0.014 272.7)&quot;,
+          &quot;light&quot;: &quot;#141a35&quot;
+        }
+      }
+    },
+    &quot;text-muted&quot;: {
+      &quot;$value&quot;: &quot;#9ba6c6&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;oklch&quot;: &quot;oklch(72.7% 0.048 270.3)&quot;,
+          &quot;light&quot;: &quot;#555f7f&quot;
+        }
+      }
+    },
+    &quot;text-faint&quot;: {
+      &quot;$value&quot;: &quot;#6c7799&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;oklch&quot;: &quot;oklch(57.3% 0.054 270.7)&quot;,
+          &quot;light&quot;: &quot;#7d86a3&quot;
+        }
+      }
+    },
+    &quot;accent&quot;: {
+      &quot;$value&quot;: &quot;#f4a640&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;oklch&quot;: &quot;oklch(78.4% 0.146 69.5)&quot;,
+          &quot;light&quot;: &quot;#b86a00&quot;
+        }
+      }
+    },
+    &quot;on-accent&quot;: {
+      &quot;$value&quot;: &quot;#1a1203&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;oklch&quot;: &quot;oklch(18.8% 0.032 83.9)&quot;,
+          &quot;light&quot;: &quot;#ffffff&quot;
+        }
+      }
+    },
+    &quot;accent-soft&quot;: {
+      &quot;$value&quot;: &quot;rgba(244, 166, 64, 0.14)&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;light&quot;: &quot;rgba(184, 106, 0, 0.1)&quot;
+        }
+      }
+    },
+    &quot;trust&quot;: {
+      &quot;$value&quot;: &quot;#4fd1a5&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;oklch&quot;: &quot;oklch(77.7% 0.131 167.1)&quot;,
+          &quot;light&quot;: &quot;#0f8763&quot;
+        }
+      }
+    },
+    &quot;on-trust&quot;: {
+      &quot;$value&quot;: &quot;#04140e&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;oklch&quot;: &quot;oklch(17.4% 0.027 168.1)&quot;,
+          &quot;light&quot;: &quot;#ffffff&quot;
+        }
+      }
+    },
+    &quot;danger&quot;: {
+      &quot;$value&quot;: &quot;#ff7a7a&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;oklch&quot;: &quot;oklch(73.5% 0.163 21.9)&quot;,
+          &quot;light&quot;: &quot;#c43d3d&quot;
+        }
+      }
+    },
+    &quot;info&quot;: {
+      &quot;$value&quot;: &quot;#7fa7ff&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;oklch&quot;: &quot;oklch(73.6% 0.136 264.7)&quot;,
+          &quot;light&quot;: &quot;#2f5bd3&quot;
+        }
+      }
+    },
+    &quot;border&quot;: {
+      &quot;$value&quot;: &quot;rgba(200, 212, 255, 0.12)&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;light&quot;: &quot;rgba(22, 32, 74, 0.1)&quot;
+        }
+      }
+    },
+    &quot;border-strong&quot;: {
+      &quot;$value&quot;: &quot;rgba(200, 212, 255, 0.22)&quot;,
+      &quot;$type&quot;: &quot;color&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;light&quot;: &quot;rgba(22, 32, 74, 0.2)&quot;
+        }
+      }
+    }
+  },
+  &quot;gradient&quot;: {
+    &quot;brand&quot;: {
+      &quot;$value&quot;: &quot;linear-gradient(180deg, #121a45 0%, #3b2a6b 38%, #c2577a 72%, #f4a640 100%)&quot;,
+      &quot;$type&quot;: &quot;gradient&quot;
+    }
+  },
+  &quot;space&quot;: {
+    &quot;1&quot;: {
+      &quot;$value&quot;: &quot;8px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;2&quot;: {
+      &quot;$value&quot;: &quot;16px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;3&quot;: {
+      &quot;$value&quot;: &quot;24px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;4&quot;: {
+      &quot;$value&quot;: &quot;32px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;5&quot;: {
+      &quot;$value&quot;: &quot;40px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;6&quot;: {
+      &quot;$value&quot;: &quot;48px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;7&quot;: {
+      &quot;$value&quot;: &quot;56px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;8&quot;: {
+      &quot;$value&quot;: &quot;64px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;9&quot;: {
+      &quot;$value&quot;: &quot;80px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;10&quot;: {
+      &quot;$value&quot;: &quot;88px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;base&quot;: {
+      &quot;$value&quot;: &quot;8px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    }
+  },
+  &quot;layout&quot;: {
+    &quot;container&quot;: {
+      &quot;$value&quot;: &quot;1240px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;note&quot;: &quot;identity&quot;
+        }
+      }
+    },
+    &quot;gutter&quot;: {
+      &quot;$value&quot;: &quot;16px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;gutter-wide&quot;: {
+      &quot;$value&quot;: &quot;24px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;bp-1&quot;: {
+      &quot;$value&quot;: &quot;480px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;bp-2&quot;: {
+      &quot;$value&quot;: &quot;600px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;bp-3&quot;: {
+      &quot;$value&quot;: &quot;750px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;bp-4&quot;: {
+      &quot;$value&quot;: &quot;1024px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    }
+  },
+  &quot;radius&quot;: {
+    &quot;card&quot;: {
+      &quot;$value&quot;: &quot;16px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;sm&quot;: {
+      &quot;$value&quot;: &quot;8px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;button&quot;: {
+      &quot;$value&quot;: &quot;999px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;note&quot;: &quot;identity: pill&quot;
+        }
+      }
+    },
+    &quot;input&quot;: {
+      &quot;$value&quot;: &quot;8px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;pill&quot;: {
+      &quot;$value&quot;: &quot;999px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    }
+  },
+  &quot;button&quot;: {
+    &quot;height&quot;: {
+      &quot;$value&quot;: &quot;48px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;height-sm&quot;: {
+      &quot;$value&quot;: &quot;32px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;pad-x&quot;: {
+      &quot;$value&quot;: &quot;24px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;font-weight&quot;: {
+      &quot;$value&quot;: &quot;600&quot;,
+      &quot;$type&quot;: &quot;fontWeight&quot;
+    }
+  },
+  &quot;input&quot;: {
+    &quot;height&quot;: {
+      &quot;$value&quot;: &quot;48px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;pad-x&quot;: {
+      &quot;$value&quot;: &quot;16px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    }
+  },
+  &quot;nav&quot;: {
+    &quot;height&quot;: {
+      &quot;$value&quot;: &quot;56px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;height-mobile&quot;: {
+      &quot;$value&quot;: &quot;48px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    }
+  },
+  &quot;card&quot;: {
+    &quot;padding&quot;: {
+      &quot;$value&quot;: &quot;16px&quot;,
+      &quot;$type&quot;: &quot;dimension&quot;
+    },
+    &quot;media-ratio&quot;: {
+      &quot;$value&quot;: &quot;16 / 10&quot;,
+      &quot;$type&quot;: &quot;string&quot;
+    }
+  },
+  &quot;motion&quot;: {
+    &quot;ease&quot;: {
+      &quot;$value&quot;: &quot;cubic-bezier(0.4, 0, 0.2, 1)&quot;,
+      &quot;$type&quot;: &quot;cubicBezier&quot;,
+      &quot;$extensions&quot;: {
+        &quot;reverse-brand&quot;: {
+          &quot;note&quot;: &quot;reference&quot;
+        }
+      }
+    },
+    &quot;duration&quot;: {
+      &quot;$value&quot;: &quot;0.25s&quot;,
+      &quot;$type&quot;: &quot;duration&quot;
+    },
+    &quot;duration-slow&quot;: {
+      &quot;$value&quot;: &quot;600ms&quot;,
+      &quot;$type&quot;: &quot;duration&quot;
+    }
+  }
+}
+</pre></div>
+</div></section>
+
+<section id="migrazione" class="alt"><div class="wrap">
+  <div class="head"><div><p class="eyebrow">Migrazione</p><h2 class="t-h1">Adottarlo nel sito</h2></div><p class="muted">Tre passi, senza riscrivere le viste.</p></div>
+  <ol class="t-lead" style="display:grid;gap:var(--space-2);padding-left:22px;max-width:70ch">
+    <li>Includere <code class="mono">tokens.css</code> e poi <code class="mono">morada-bridge.css</code> prima di <code class="mono">styles.css</code>: le variabili attuali (<code class="mono">--bg</code>, <code class="mono">--accent</code>, <code class="mono">--r</code>, …) diventano alias dei token.</li>
+    <li>Sostituire i valori fissi fuori griglia: <code class="mono">min-height: 44px</code> → <code class="mono">var(--button-height)</code>, <code class="mono">padding: 0 18px</code> → <code class="mono">0 var(--button-pad-x)</code>, <code class="mono">--r-sm: 11px</code> → <code class="mono">var(--radius-sm)</code>.</li>
+    <li>Applicare la scala tipografica ai titoli (<code class="mono">h1</code>, <code class="mono">h2</code>, <code class="mono">h3</code>) e le regole di voce ai testi dei CTA.</li>
+  </ol>
+  <pre style="margin-top:var(--space-3)" id="src-morada-bridge.css">/* Maps Morada&#39;s existing variable names onto the v1 tokens. Load after tokens.css, before the app stylesheet,
+   and remove the old :root values from the app stylesheet. */
+:root, :root[data-theme] {
+  --bg: var(--color-background);
+  --bg-2: var(--color-background-2);
+  --surface: var(--color-surface-glass);
+  --surface-2: var(--color-surface);
+  --solid: var(--color-surface);
+  --line: var(--color-border);
+  --line-2: var(--color-border-strong);
+  --fg: var(--color-text);
+  --muted: var(--color-text-muted);
+  --faint: var(--color-text-faint);
+  --accent: var(--color-accent);
+  --accent-ink: var(--color-on-accent);
+  --accent-soft: var(--color-accent-soft);
+  --trust: var(--color-trust);
+  --danger: var(--color-danger);
+  --info: var(--color-info);
+  --display: var(--font-display);
+  --body: var(--font-body);
+  --mono: var(--font-mono);
+  --r: var(--radius-card);
+  --r-sm: var(--radius-sm);
+  --header-h: var(--nav-height);
+}
+</pre>
+</div></section>
+</main>
+<footer><div class="wrap">Morada design system v1 · struttura misurata con reverse-brand su www.immobiliare.it il 2026-10-29; identità Morada.</div></footer>
+<script>
+(function(){
+var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1}):null;
+document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in')});
+var b=document.getElementById('theme'),root=document.documentElement;
+function sync(){var light=root.dataset.theme==='light'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: light)').matches);b.textContent=light?'Tema scuro':'Tema chiaro'}
+b.addEventListener('click',function(){var light=b.textContent==='Tema chiaro';root.dataset.theme=light?'light':'dark';sync()});sync();
+document.querySelectorAll('[data-dl]').forEach(function(x){x.addEventListener('click',function(){var n=x.dataset.dl,a=document.createElement('a');a.href=URL.createObjectURL(new Blob([document.getElementById('src-'+n).textContent],{type:'text/plain'}));a.download=n;a.click()})});
+})();
+</script>
+</body>
+</html>

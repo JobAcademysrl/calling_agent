@@ -1,0 +1,167 @@
+{
+  "name": "Morada",
+  "language": "es",
+  "bodySize": 16,
+  "container": 1240,
+  "buttonShape": "pill",
+  "headingTracking": -0.02,
+  "headingWeights": {
+    "display": 700,
+    "h1": 700,
+    "h2": 650,
+    "h3": 600,
+    "h4": 600
+  },
+  "fonts": {
+    "display": "'Bricolage Grotesque', 'Avenir Next', 'Segoe UI', system-ui, sans-serif",
+    "body": "'Figtree', 'Segoe UI', system-ui, -apple-system, sans-serif",
+    "mono": "'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace"
+  },
+  "gradient": "linear-gradient(180deg, #121a45 0%, #3b2a6b 38%, #c2577a 72%, #f4a640 100%)",
+  "colors": {
+    "dark": {
+      "background": "#0a1024",
+      "background-2": "#0f1733",
+      "surface": "#121b3a",
+      "surface-glass": "rgba(255, 255, 255, 0.045)",
+      "text": "#eef1fb",
+      "text-muted": "#9ba6c6",
+      "text-faint": "#6c7799",
+      "accent": "#f4a640",
+      "on-accent": "#1a1203",
+      "accent-soft": "rgba(244, 166, 64, 0.14)",
+      "trust": "#4fd1a5",
+      "on-trust": "#04140e",
+      "danger": "#ff7a7a",
+      "info": "#7fa7ff",
+      "border": "rgba(200, 212, 255, 0.12)",
+      "border-strong": "rgba(200, 212, 255, 0.22)"
+    },
+    "light": {
+      "background": "#f3f4fa",
+      "background-2": "#e9ecf6",
+      "surface": "#ffffff",
+      "surface-glass": "rgba(255, 255, 255, 0.78)",
+      "text": "#141a35",
+      "text-muted": "#555f7f",
+      "text-faint": "#7d86a3",
+      "accent": "#b86a00",
+      "on-accent": "#ffffff",
+      "accent-soft": "rgba(184, 106, 0, 0.1)",
+      "trust": "#0f8763",
+      "on-trust": "#ffffff",
+      "danger": "#c43d3d",
+      "info": "#2f5bd3",
+      "border": "rgba(22, 32, 74, 0.1)",
+      "border-strong": "rgba(22, 32, 74, 0.2)"
+    }
+  },
+  "logoSvg": "<svg viewBox=\"0 0 32 32\" aria-hidden=\"true\"><defs><linearGradient id=\"lg\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffd08a\"/><stop offset=\"1\" stop-color=\"#f4a640\"/></linearGradient></defs><path d=\"M2 26 11 12l5 6 4-5 10 13Z\" fill=\"url(#lg)\"/><rect x=\"13\" y=\"19\" width=\"6\" height=\"7\" rx=\"1\" fill=\"#0a1024\" opacity=\".85\"/><circle cx=\"24\" cy=\"7\" r=\"3\" fill=\"#ffd08a\"/></svg>",
+  "bridge": {
+    "--bg": "var(--color-background)",
+    "--bg-2": "var(--color-background-2)",
+    "--surface": "var(--color-surface-glass)",
+    "--surface-2": "var(--color-surface)",
+    "--solid": "var(--color-surface)",
+    "--line": "var(--color-border)",
+    "--line-2": "var(--color-border-strong)",
+    "--fg": "var(--color-text)",
+    "--muted": "var(--color-text-muted)",
+    "--faint": "var(--color-text-faint)",
+    "--accent": "var(--color-accent)",
+    "--accent-ink": "var(--color-on-accent)",
+    "--accent-soft": "var(--color-accent-soft)",
+    "--trust": "var(--color-trust)",
+    "--danger": "var(--color-danger)",
+    "--info": "var(--color-info)",
+    "--display": "var(--font-display)",
+    "--body": "var(--font-body)",
+    "--mono": "var(--font-mono)",
+    "--r": "var(--radius-card)",
+    "--r-sm": "var(--radius-sm)",
+    "--header-h": "var(--nav-height)"
+  },
+  "copy": {
+    "coverTitle": "Morada, sistema de diseño",
+    "ctaPrimary": "Ver componentes",
+    "samples": {
+      "display": "Encuentra tu casa en Venezuela",
+      "h1": "Casas en venta en Caracas",
+      "h2": "Apartamentos con título verificado",
+      "h3": "Precio en dólares y bolívares",
+      "h4": "Planta eléctrica y tanque",
+      "lead": "Busca, compara y contacta al agente en minutos. Sin sorpresas en el precio.",
+      "body": "Cada anuncio muestra el precio en USD y en Bs. al tasa BCV del día, los servicios de la zona y el estado del título en el SAREN.",
+      "small": "Actualizado hoy · Tasa BCV de referencia"
+    },
+    "nav": [
+      "Comprar",
+      "Alquilar",
+      "Obra nueva",
+      "Valorar"
+    ],
+    "publish": "Publicar",
+    "buy": "Comprar",
+    "rent": "Alquilar",
+    "searchPlaceholder": "Ciudad, urbanización o zona",
+    "search": "Buscar",
+    "secondary": "Guardar búsqueda",
+    "trust": "Verificar título",
+    "ghost": "Ver en el mapa",
+    "small": "Filtros",
+    "listings": [
+      {
+        "usd": "US$ 85.000",
+        "bs": "≈ Bs. 3,1 M",
+        "title": "Apartamento en Los Palos Grandes",
+        "meta": "3 hab · 2 baños · 98 m² · planta eléctrica",
+        "chip": "Título verificado",
+        "verified": true
+      },
+      {
+        "usd": "US$ 450/mes",
+        "bs": "≈ Bs. 16.400",
+        "title": "Anexo en El Cafetal",
+        "meta": "1 hab · 1 baño · 40 m² · tanque",
+        "chip": "Nuevo",
+        "verified": false
+      },
+      {
+        "usd": "US$ 210.000",
+        "bs": "≈ Bs. 7,6 M",
+        "title": "Casa en Valencia, El Viñedo",
+        "meta": "4 hab · 3 baños · 260 m² · pozo",
+        "chip": "Título verificado",
+        "verified": true
+      }
+    ],
+    "rules": [
+      {
+        "title": "Titoli in sentence case",
+        "why": "Solo la prima parola e i nomi propri in maiuscolo, come il 100% dei titoli misurati.",
+        "ex": "Casas en venta en Maracaibo"
+      },
+      {
+        "title": "Titoli di circa 5 parole",
+        "why": "Mediana misurata: 5 parole; massimo 9. Il dettaglio va nel lead.",
+        "ex": "¿Buscas casa? Te ayudamos"
+      },
+      {
+        "title": "Parla al lettore con il \"tú\"",
+        "why": "Seconda persona dominante (6 contro 1). In Venezuela il \"tú\" è naturale nel digitale.",
+        "ex": "Publica tu inmueble en minutos"
+      },
+      {
+        "title": "CTA che iniziano con un verbo",
+        "why": "Etichette brevi (1–2 parole) all'infinito o imperativo: Buscar, Publicar, Valorar.",
+        "ex": "Buscar · Publicar · Valorar"
+      },
+      {
+        "title": "Niente punti esclamativi",
+        "why": "Solo 1 riga su 34 nel riferimento ne usa uno: il tono resta pacato e affidabile.",
+        "ex": "Tu título, verificado en el SAREN."
+      }
+    ]
+  },
+  "fontsUrl": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+}

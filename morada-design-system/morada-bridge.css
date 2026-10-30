@@ -1,0 +1,26 @@
+/* Maps Morada's existing variable names onto the v1 tokens. Load after tokens.css, before the app stylesheet,
+   and remove the old :root values from the app stylesheet. */
+:root, :root[data-theme] {
+  --bg: var(--color-background);
+  --bg-2: var(--color-background-2);
+  --surface: var(--color-surface-glass);
+  --surface-2: var(--color-surface);
+  --solid: var(--color-surface);
+  --line: var(--color-border);
+  --line-2: var(--color-border-strong);
+  --fg: var(--color-text);
+  --muted: var(--color-text-muted);
+  --faint: var(--color-text-faint);
+  --accent: var(--color-accent);
+  --accent-ink: var(--color-on-accent);
+  --accent-soft: var(--color-accent-soft);
+  --trust: var(--color-trust);
+  --danger: var(--color-danger);
+  --info: var(--color-info);
+  --display: var(--font-display);
+  --body: var(--font-body);
+  --mono: var(--font-mono);
+  --r: var(--radius-card);
+  --r-sm: var(--radius-sm);
+  --header-h: var(--nav-height);
+}

@@ -1,0 +1,116 @@
+/* Morada design tokens v1. Identity: Morada. Structure (type ratios, 8px grid, radii, component sizes, motion)
+   derived from measurements of a reference portal; no colours, fonts, images or copy taken from it. */
+:root {
+  /* font */
+  --font-display: 'Bricolage Grotesque', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Figtree', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  /* type */
+  --type-display-size: clamp(2.875rem, 2.457rem + 1.714vw, 4rem); /* 46px @390 -> 64px @1440 · ref 56px */
+  --type-display-weight: 700;
+  --type-display-leading: 1.2;
+  --type-display-tracking: -0.02em;
+  --type-display-family: var(--font-display);
+  --type-h1-size: clamp(1.625rem, 1.207rem + 1.714vw, 2.75rem); /* 26px @390 -> 44px @1440 · ref 40px */
+  --type-h1-weight: 700;
+  --type-h1-leading: 1.2;
+  --type-h1-tracking: -0.02em;
+  --type-h1-family: var(--font-display);
+  --type-h2-size: clamp(1.5rem, 1.407rem + 0.381vw, 1.75rem); /* 24px @390 -> 28px @1440 · ref 24px */
+  --type-h2-weight: 650;
+  --type-h2-leading: 1.333;
+  --type-h2-tracking: -0.02em;
+  --type-h2-family: var(--font-display);
+  --type-h3-size: clamp(1.125rem, 0.986rem + 0.571vw, 1.5rem); /* 18px @390 -> 24px @1440 · ref 21.24px (inferred) */
+  --type-h3-weight: 600;
+  --type-h3-leading: 1.333;
+  --type-h3-tracking: -0.02em;
+  --type-h3-family: var(--font-display);
+  --type-h4-size: clamp(1rem, 0.907rem + 0.381vw, 1.25rem); /* 16px @390 -> 20px @1440 · ref 18.8px (inferred) */
+  --type-h4-weight: 600;
+  --type-h4-leading: 1.333;
+  --type-h4-tracking: -0.02em;
+  --type-h4-family: var(--font-display);
+  --type-lead-size: 1.125rem; /* 18px @390 -> 18px @1440 · ref 16px */
+  --type-lead-weight: 400;
+  --type-lead-leading: 1.5;
+  --type-lead-tracking: 0em;
+  --type-lead-family: var(--font-body);
+  --type-body-size: 1rem; /* 16px @390 -> 16px @1440 · ref 14px */
+  --type-body-weight: 400;
+  --type-body-leading: 1.5;
+  --type-body-tracking: 0em;
+  --type-body-family: var(--font-body);
+  --type-small-size: 0.875rem; /* 14px @390 -> 14px @1440 · ref 12px */
+  --type-small-weight: 400;
+  --type-small-leading: 1.5;
+  --type-small-tracking: 0em;
+  --type-small-family: var(--font-body);
+  /* color */
+  --color-background: #0a1024; /* oklch(18.0% 0.042 269.3) */
+  --color-background-2: #0f1733; /* oklch(21.5% 0.056 269.3) */
+  --color-surface: #121b3a; /* oklch(23.3% 0.061 269.1) */
+  --color-surface-glass: rgba(255, 255, 255, 0.045);
+  --color-text: #eef1fb; /* oklch(95.9% 0.014 272.7) */
+  --color-text-muted: #9ba6c6; /* oklch(72.7% 0.048 270.3) */
+  --color-text-faint: #6c7799; /* oklch(57.3% 0.054 270.7) */
+  --color-accent: #f4a640; /* oklch(78.4% 0.146 69.5) */
+  --color-on-accent: #1a1203; /* oklch(18.8% 0.032 83.9) */
+  --color-accent-soft: rgba(244, 166, 64, 0.14);
+  --color-trust: #4fd1a5; /* oklch(77.7% 0.131 167.1) */
+  --color-on-trust: #04140e; /* oklch(17.4% 0.027 168.1) */
+  --color-danger: #ff7a7a; /* oklch(73.5% 0.163 21.9) */
+  --color-info: #7fa7ff; /* oklch(73.6% 0.136 264.7) */
+  --color-border: rgba(200, 212, 255, 0.12);
+  --color-border-strong: rgba(200, 212, 255, 0.22);
+  /* gradient */
+  --gradient-brand: linear-gradient(180deg, #121a45 0%, #3b2a6b 38%, #c2577a 72%, #f4a640 100%);
+  /* space */
+  --space-base: 8px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 88px;
+  /* layout */
+  --layout-container: 1240px; /* identity */
+  --layout-gutter: 16px;
+  --layout-gutter-wide: 24px;
+  --layout-bp-1: 480px;
+  --layout-bp-2: 600px;
+  --layout-bp-3: 750px;
+  --layout-bp-4: 1024px;
+  /* radius */
+  --radius-card: 16px;
+  --radius-sm: 8px;
+  --radius-button: 999px; /* identity: pill */
+  --radius-input: 8px;
+  --radius-pill: 999px;
+  /* button */
+  --button-height: 48px;
+  --button-height-sm: 32px;
+  --button-pad-x: 24px;
+  --button-font-weight: 600;
+  /* input */
+  --input-height: 48px;
+  --input-pad-x: 16px;
+  /* nav */
+  --nav-height: 56px;
+  --nav-height-mobile: 48px;
+  /* card */
+  --card-padding: 16px;
+  --card-media-ratio: 16 / 10;
+  /* motion */
+  --motion-ease: cubic-bezier(0.4, 0, 0.2, 1); /* reference */
+  --motion-duration: 0.25s;
+  --motion-duration-slow: 600ms;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --color-background: #f3f4fa; --color-background-2: #e9ecf6; --color-surface: #ffffff; --color-surface-glass: rgba(255, 255, 255, 0.78); --color-text: #141a35; --color-text-muted: #555f7f; --color-text-faint: #7d86a3; --color-accent: #b86a00; --color-on-accent: #ffffff; --color-accent-soft: rgba(184, 106, 0, 0.1); --color-trust: #0f8763; --color-on-trust: #ffffff; --color-danger: #c43d3d; --color-info: #2f5bd3; --color-border: rgba(22, 32, 74, 0.1); --color-border-strong: rgba(22, 32, 74, 0.2); color-scheme: light; } }
+:root[data-theme="light"] { --color-background: #f3f4fa; --color-background-2: #e9ecf6; --color-surface: #ffffff; --color-surface-glass: rgba(255, 255, 255, 0.78); --color-text: #141a35; --color-text-muted: #555f7f; --color-text-faint: #7d86a3; --color-accent: #b86a00; --color-on-accent: #ffffff; --color-accent-soft: rgba(184, 106, 0, 0.1); --color-trust: #0f8763; --color-on-trust: #ffffff; --color-danger: #c43d3d; --color-info: #2f5bd3; --color-border: rgba(22, 32, 74, 0.1); --color-border-strong: rgba(22, 32, 74, 0.2); color-scheme: light; }
+@media (max-width: 750px) { :root { --nav-height: var(--nav-height-mobile); } }
