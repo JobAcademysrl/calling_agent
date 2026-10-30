@@ -13,10 +13,10 @@ await cp(join(ROOT, 'shared'), join(OUT, 'shared'), { recursive: true });
 
 // Variante de página única con los estilos en línea (para alojamientos que solo admiten scripts externos).
 const html = await readFile(join(ROOT, 'public', 'index.html'), 'utf8');
-const css = (await Promise.all(['vendor/leaflet.css', 'vendor/MarkerCluster.css', 'styles.css'].map(f => readFile(join(ROOT, 'public', f), 'utf8')))).join('\n');
+const css = (await Promise.all(['vendor/leaflet.css', 'vendor/MarkerCluster.css', 'styles.css', 'theme-portal.css'].map(f => readFile(join(ROOT, 'public', f), 'utf8')))).join('\n');
 const head = html.match(/<head>([\s\S]*?)<\/head>/)[1]
   .replace(/<meta charset[^>]*>\n?/, '').replace(/<meta name="viewport"[^>]*>\n?/, '')
-  .replace(/<link rel="stylesheet" href="(vendor\/[^"]+|styles\.css)">\n?/g, '');
+  .replace(/<link rel="stylesheet" href="(vendor\/[^"]+|styles\.css|theme-portal\.css)">\n?/g, '');
 const body = html.match(/<body>([\s\S]*?)<\/body>/)[1];
 await writeFile(join(OUT, 'inline.html'), `${head.trim()}\n<style>\n${css}\n</style>\n${body.trim()}\n`);
 console.log('dist/ listo');
